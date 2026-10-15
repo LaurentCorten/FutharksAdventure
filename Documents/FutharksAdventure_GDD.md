@@ -8,11 +8,11 @@ Octobre 2026
 
 **Engine :** Unity 6 (C#)
 
-**Support :** PC (vertical slice) - extension possible sur console ou/et téléphone
+**Support :** PC (vertical slice) - expension possible sur console ou/et téléphone
 
 **Genre :** Roguelike - Tour par tour - Grid based
 
-**USP :**
+**USP :** [TODO: trouver mieux !]
 
 *Un **roguelike** pur au tour par tour, ou chaque pas coute de la bouffe et chaque choix compte.*
 
@@ -45,7 +45,7 @@ Octobre 2026
 
 Futhark's Adventure est un roguelike en 2D vue du dessus, au tour par tour, dans l'univers de la mythologie nordique. Le joueur incarne Futhark, un.e guerrier.e mort.e au combat et accueilli.e au Valhalla, qui doit relever un defi lance par Odin : traverser les autres royaumes, y vaincre des figures notoires, puis affronter Odin lui-meme.
 
-L'experience visee est celle d'une tension permanente de gestion de ressources. Dans la lignee de Rogue, le temps ne s'arrete jamais : chaque action du joueur declenche un tour de jeu, les ennemis jouent en meme temps que lui, et chaque tour consomme une unite de bouffe. Rester immobile ou hesiter a un cout, tout comme foncer sans preparation. Le joueur doit en permanence arbitrer entre explorer pour looter et avancer vers la sortie avant d'etre a court de ressources.
+L'experience visee est celle d'une tension permanente de gestion de ressources. Dans la lignee de Rogue, le temps ne s'arrete jamais : chaque action du joueur declenche un tour de jeu, les ennemis jouent en meme temps que lui, et chaque tour consomme une unite de nourriture. Le joueur doit en permanence arbitrer entre explorer pour looter et avancer vers la sortie avant d'etre a court de ressources.
 
 Le jeu se veut lisible, rejouable et competitif : chaque run repart de zero, et l'objectif ultime est de faire le meilleur score possible pour grimper au leaderboard. Les details du recit, des royaumes et des systemes sont decrits dans les chapitres suivants.
 
@@ -53,18 +53,18 @@ Le jeu se veut lisible, rejouable et competitif : chaque run repart de zero, et 
 
 Le joueur demarre une run au Valhalla. Il descend ensuite d'etage en etage. Chaque etage est genere procedurellement : le joueur y entre par une piece, fouille l'etage pour looter et rencontrer des marchands ou des monstres, puis trouve la sortie pour passer a l'etage suivant. Un groupe d'etages forme un biome (un royaume), qui se termine par un boss. Apres le dernier royaume, le joueur retourne en Asgard pour affronter Odin.
 
-La run se termine par la mort du personnage, ou par la victoire contre Odin. Dans les deux cas, le score est enregistre dans le leaderboard, puis une nouvelle run peut commencer. La mort n'est pas un echec narratif : Futhark est deja mort, heros du Valhalla, ce qui justifie la resurrection entre les runs.
+La run se termine par la mort du personnage, ou par la victoire contre Odin. Dans les deux cas, le score est enregistre dans le leaderboard, puis une nouvelle run peut commencer. La mort n'est pas un echec narratif : Futhark est deja mort.e, hero.ines du Valhalla, ce qui justifie la resurrection entre les runs.
 
 ### Parametres generaux
 
 | Element | Choix |
 |---|---|
-| Perspective / camera | 2D, vue du dessus (type minimap), grid based |
-| Direction artistique | Pixel art, ambiance nordique |
-| Controles | Clavier, manette ou tactile en fonction du support |
+| Perspective / camera | 2D, vue du dessus, grid based |
+| Direction artistique | Pixel art, ambiance nordique, une tonalite adaptee a chaque biome |
+| Controles | Clavier et manette (ou tactile en fonction du support) |
 | Rythme | Tour par tour : 1 action du joueur = 1 tour de jeu = 1 action de chaque ennemi |
 | Duree d'une run | [A DEFINIR] |
-| Format d'ecran | 16:9 (paysage), variante portrait envisagee pour le tactile [A VERIFIER] |
+| Format d'ecran | 16:9 (paysage), variante portrait envisagee pour le telephone |
 
 ### Jeux de reference
 
@@ -85,8 +85,8 @@ Futhark etant deja mort, la mort n'est pas une fin definitive : c'est ce qui jus
 Odin lance a Futhark un defi dont la forme exacte reste [A DEFINIR] (concours, epreuve initiatique, ou autre). Son principe est fixe :
 
 - aller dans chacun des **8 autres royaumes** ;
-- y recuperer un **objet unique** (artefact) ;
 - y vaincre une **personne notoire**, qui joue le role de boss du royaume ;
+- y recuperer un **objet unique** (artefact) ;
 - puis revenir en **Asgard** et affronter **Odin** lui-meme, boss final du jeu.
 
 ### Structure de la progression
@@ -102,10 +102,8 @@ L'ordre dans lequel les royaumes sont traverses est [A DEFINIR]. Asgard est a la
 
 ### Les neuf royaumes
 
-*Les descriptions ci-dessous sont issues des notes de conception. Les mentions [A VERIFIER] signalent un passage illisible ou incomplet.*
-
 **Asgard**
-Royaume des dieux Ases, lieu de grandeur et de splendeur. On y trouve le Valhalla (le hall des heros) et Bifrost, le pont arc-en-ciel garde par Heimdall. Boss final : **Odin**, dieu des Ases. Artefact : [A DEFINIR].
+Royaume des dieux Ases, lieu de grandeur et de splendeur. On y trouve le Valhalla (le hall des heros) et Bifrost, le pont arc-en-ciel garde par Heimdall. Boss final : **Odin**, dieu Ase.
 
 **Alfheim**
 Royaume des Elfes, associe a la lumiere. Ambiance de douceur, de cosmos, de sagesse, de beaute et de magie. Boss : **Freyr** (dieu Vane). Artefact : [A DEFINIR].
@@ -114,28 +112,26 @@ Royaume des Elfes, associe a la lumiere. Ambiance de douceur, de cosmos, de sage
 Royaume des dieux Vanes, fertile et paisible, tourne vers la nature et la magie. Boss : **Njord**. Artefact : [A DEFINIR].
 
 **Muspelheim**
-Monde primordial du feu. Boss : **Surtur** (geant). Artefact : [A DEFINIR].
+Monde primordial du feu. Boss : **Surtur** ("geant"). Artefact : [A DEFINIR].
 
 **Midgard**
 Royaume des humains, entoure d'un ocean infini. Boss : **Jormungandr** (le serpent). Artefact : [A DEFINIR].
 
 **Niflheim**
-Monde primordial de glace, de froid extreme et de brumes. Y figurent les rivieres Elivagar, la source Hvergelmir, l'obscurite et le froid. Ambiance de force primordiale, de purete et de danger. [A VERIFIER : fin de la description coupee dans les notes]. Boss : **Nidhogg** (dragon). Artefact : [A DEFINIR].
+Monde primordial de glace, de froid extreme et de brumes. Y figurent les rivieres Elivagar, la source Hvergelmir, l'obscurite et le froid. Ambiance de force primordiale, de purete et de danger, "epreuves" et "metamorphoses". Boss : **Nidhogg** (dragon). Artefact : [A DEFINIR].
 
 **Jotunheim**
-Royaume des geants, sauvage et rocheux, fait de forets et de montagnes. Boss : [A DEFINIR]. Artefact : [A DEFINIR].
+Royaume des "geants", sauvage et rocheux, fait de forets et de montagnes. Boss : [A DEFINIR]. Artefact : [A DEFINIR].
 
 **Helheim**
 Royaume souterrain des morts de causes naturelles ou de vieillesse. Boss : **Hel** (deesse). Artefact : [A DEFINIR].
 
-**Svartalfheim (Nidavellir)**
-Royaume souterrain des Nains. Ambiance artisanale et obscure, tournee vers la forge, la magie et les armes puissantes [A VERIFIER : fin de la description coupee dans les notes]. Boss : **Alberich** [A VERIFIER : orthographe et role]. Artefacts associes : **Mjolnir** et **Brisingamen**.
-
-*Note : les notes marquent aussi des reperes de position (N, W, SE, centre) a cote de certains royaumes, probablement pour leur placement autour d'Yggdrasil. [A VERIFIER]*
+**Svartalfheim (Nidavellir / Myrkheim)** [TODO: A approfondir]
+Royaume souterrain des Nains et des elfes noirs. Ambiance artisanale et obscure, tournee vers la forge, la magie et les armes puissantes [A VERIFIER : fin de la description coupee dans les notes]. Boss : **Alberich** (roi sorcier). Artefacts associes : **Mjolnir** et **Brisingamen**.
 
 ### Mythes et artefacts
 
-**Ymir et la creation de Midgard.** Ymir est l'ancetre des geants, ne de la rencontre des glaces de Niflheim et des flammes de Muspelheim. Son corps a servi a creer Midgard (tue par Odin : [A VERIFIER]). Sa chair est devenue la terre, son sang les mers, et ses sourcils une barriere protectrice. Cette barriere protege les humains des geants et explique la relation conflictuelle entre les deux peuples.
+**Ymir et la creation de Midgard.** Ymir est l'ancetre des geants, ne de la rencontre des glaces de Niflheim et des flammes de Muspelheim. Son corps a servi a creer Midgard (tue par Odin et ses adelphes). Sa chair est devenue la terre, son sang les mers, et ses sourcils une barriere protectrice. Cette barriere protege les humains des "geants" et explique la relation conflictuelle entre les deux peuples.
 
 **Artefacts et reliques envisages** (leur attribution aux royaumes est [A DEFINIR]) :
 
@@ -149,7 +145,7 @@ Les artefacts recuperes sont des objets uniques lies a un royaume. Leur effet en
 
 ## 3. Boucle de gameplay
 
-Le jeu repose sur trois boucles imbriquees : le **tour de jeu** (quelques secondes), l'**etage** (quelques minutes) et la **run** (session complete). Un lecteur qui comprend ces trois niveaux comprend le jeu.
+Le jeu repose sur trois boucles imbriquees : le **tour de jeu** (quelques secondes), l'**etage** (quelques minutes) et la **run** (session complete).
 
 ### 3.1 Boucle du tour (boucle principale)
 
@@ -161,23 +157,22 @@ Le jeu est un roguelike au sens de *Rogue* : il n'y a pas de temps reel ni de co
 4. Le cout du tour est preleve sur les ressources du joueur (voir 3.2).
 5. Le jeu attend la prochaine action du joueur.
 
-Un tour de jeu correspond donc a une action du joueur et a une action de chaque ennemi actif. L'ordre de resolution entre ennemis, et la distance a partir de laquelle un ennemi est actif, sont [A DEFINIR].
+Un tour de jeu correspond donc a une action du joueur et a une action de chaque ennemi actif.
 
-### 3.2 Economie du tour : la bouffe
+### 3.2 Economie du tour : la nourriture
 
-Chaque tour de jeu coute **1 unite de bouffe**. La bouffe est la ressource qui limite le temps d'exploration : elle empeche le joueur d'attendre ou de fouiller indefiniment.
+Chaque tour de jeu coute **1 unite de nourriture**. La nourriture est la ressource qui limite le temps d'exploration : elle empeche le joueur de fouiller indefiniment.
 
 - Si le joueur n'a plus de bouffe, chaque tour coute **1 point de vie (PV)** a la place.
 - La bouffe se recupere en la trouvant (loot, marchands). Le stock de depart est [A DEFINIR].
-- Un item peut convertir de la bouffe en PV ou inversement ([A VERIFIER] : item de transformation note dans les premieres notes, ratio envisage 1 pour 1).
+- Un item peut convertir de la bouffe en PV (ratio envisage 1 pour 1).
 
 | Action | Consomme un tour | Autre cout |
 |---|---|---|
 | Deplacement d'une case | Oui | - |
 | Attaque au corps a corps | Oui | - |
 | Attaque a distance (hachette) | Oui | 1 hachette (stock limite) |
-| Utilisation d'un item | [A VERIFIER] | Selon l'item |
-| Ouverture du menu / de l'inventaire | Non [A VERIFIER] | - |
+| Utilisation d'un item | Selon l'item | Selon l'item |
 
 ### 3.3 Boucle de l'etage
 
@@ -216,7 +211,7 @@ Le score mesure la performance d'une run et determine le classement au leaderboa
 |---|---|
 | Etage atteint | Points fixes ou incrementaux selon l'etage [A DEFINIR] |
 | Monstres tues | Points selon le type de monstre |
-| Bonus de loot | Points selon la valeur du loot (petit / moyen / gros) [A VERIFIER : formule exacte illisible dans les notes] |
+| Bonus de loot | Points selon la valeur du loot (petit / moyen / gros) |
 
 La valeur brute du loot croit avec sa taille (petit < moyen < gros). Les formules et la ponderation entre ces trois sources sont [A DEFINIR].
 
@@ -247,14 +242,14 @@ La mort n'est pas une fin narrative : Futhark est deja mort, heros du Valhalla, 
 
 ### 4.3 Victoire
 
-La run est gagnee lorsque le joueur **vainc Odin**, boss final, en Asgard. Cette victoire suppose d'avoir battu les boss des 8 autres royaumes et recupere leurs artefacts. Une cinematique ou un ecran de conclusion special est [A DEFINIR]. Apres la victoire, le score est enregistre et une nouvelle run peut commencer.
+La run est gagnee lorsque le joueur **vainc Odin**, boss final, en Asgard. Cette victoire suppose d'avoir battu les boss des 8 autres royaumes et recupere leurs artefacts. Apres la victoire, le score est enregistre et une nouvelle run peut commencer.
 
 ### 4.4 Ecran de fin de run
 
 A la fin de chaque run (victoire ou defaite), le jeu affiche un ecran de fin avec :
 
 - le resultat (victoire / defaite) et la cause de la fin de run ;
-- le **score** detaille (etage atteint, monstres tues, bonus de loot) ;
+- le **score** detaille (etage atteint, monstres tues, bonus de loot) [A Confirmer] ;
 - le classement au **leaderboard** ;
 - les actions disponibles : recommencer une run, quitter le jeu.
 
@@ -272,14 +267,13 @@ Le contenu exact de l'ecran, son ton visuel (differenciation entre victoire et d
 
 | Vue | Description | Camera |
 |---|---|---|
-| Menu principal | Point d'entree du jeu : lancer une run, options, leaderboard, quitter [A DEFINIR : existence et contenu] | Fixe |
-| Vue etage (vue principale) | Vue 2D du dessus, sur grille, dans laquelle le joueur se deplace, combat et loote | [A DEFINIR : fixe sur l'etage ou centree sur le joueur] |
-| Interface marchand | Ecran d'achat ouvert lors d'une rencontre avec un marchand (4 items aleatoires proposes [A VERIFIER]) | Fixe (superposee a la vue etage) |
+| Menu principal | Point d'entree du jeu : lancer une run, options, leaderboard, quitter [A Confirmer] | Fixe |
+| Vue etage (vue principale)| Vue 2D du dessus, sur grille, dans laquelle le joueur se deplace, combat et loote | Centree sur le joueur |
+| Interface marchand | Ecran d'achat ouvert lors d'une rencontre avec un marchand (4 items aleatoires proposes) | Fixe (superposee a la vue etage) |
 | Inventaire / equipement | Consultation et gestion des items et de l'equipement du personnage | Fixe (superposee a la vue etage) |
 | Menu pause | Menu accessible en cours de run | Fixe (superposee a la vue etage) |
 | Ecran de fin de run | Resultat, score detaille et leaderboard (voir chapitre 4) | Fixe |
 
-Le combat se deroule directement dans la vue etage : il n'y a pas de scene de combat separee, car le jeu est un roguelike au tour par tour dans lequel monstres et joueur evoluent sur la meme grille.
 
 ### 5.2 Enchainement des vues
 
@@ -293,12 +287,12 @@ Menu principal -> Vue etage <-> Interface marchand
 
 - L'inventaire, le menu pause et l'interface marchand s'ouvrent par-dessus la vue etage et s'y referment sans la quitter.
 - L'ouverture de ces ecrans ne fait pas avancer le temps de jeu [A VERIFIER].
-- Le passage d'un etage a l'autre se fait par la case de sortie, sans ecran intermediaire [A DEFINIR : ecran de transition ou chargement].
-- Le passage d'un biome a l'autre (apres un boss) peut etre marque par un ecran dedie [A DEFINIR].
+- Le passage d'un etage a l'autre se fait par la case de sortie, sans ecran intermediaire [Ecran de chargement théoriquement jamais rencontre a prevoir].
+- Le passage d'un biome a l'autre (apres un boss) peut etre marque par un ecran dedie.
 
 ### 5.3 HUD de la vue etage
 
-Le HUD affiche en permanence les informations vitales de la run. Il est concu en **16:9 (paysage)** pour le PC, avec une variante **portrait** envisagee pour le tactile [A VERIFIER].
+Le HUD affiche en permanence les informations vitales de la run. Il est concu en **16:9 (paysage)** pour le PC, avec une variante **portrait** envisagee pour le telephone.
 
 | Element | Description | Position (paysage) |
 |---|---|---|
@@ -308,13 +302,11 @@ Le HUD affiche en permanence les informations vitales de la run. Il est concu en
 | Objets lancables | Nombre de hachettes disponibles pour l'attaque a distance (ex. 5) | Sous la barre de vie |
 | Inventaire | Emplacements d'items utilisables (jusqu'a 5 affiches) | Haut droite, en ligne |
 | Score | Score courant de la run (ex. 1.320.000) | Bas droite |
-| Mana | Jauge de mana [A DEFINIR : le systeme de mana n'est pas confirme] | - |
 
 Notes de conception :
 
 - **Inventaire** : le personnage dispose de 3 emplacements de base, extensibles par l'equipement (voir chapitre 8). Le HUD prevoit jusqu'a 5 emplacements affiches [A VERIFIER].
-- **Variante portrait (tactile)** : barre de vie et compteurs en haut, colonne d'emplacements d'inventaire sur le cote droit, croix directionnelle virtuelle en bas a gauche, score en bas [A VERIFIER : disposition issue d'un croquis a confirmer ; une mention "GSM ?" figure dans les notes].
-- Les etats de la run (monstres, boss) peuvent necessiter des elements de HUD supplementaires, par exemple une barre de vie de boss [A DEFINIR].
+- **Variante portrait (tactile)** : barre de vie et compteurs en haut, colonne d'emplacements d'inventaire sur le cote droit en burger menu, croix directionnelle virtuelle en bas au centre, score tout en bas.
 
 ### 5.4 Menu pause
 
@@ -322,17 +314,17 @@ Le menu pause est accessible a tout moment pendant la vue etage :
 
 - **Clavier** : Echap
 - **Manette** : bouton Start
-- **Tactile** : bouton menu a l'ecran (type "burger") [A VERIFIER]
+- **Tactile** : bouton menu a l'ecran [A DEFINIR]
 
-Contenu du menu : reprendre, options, abandonner la run, quitter le jeu [A DEFINIR]. Les controles associes a chaque support sont detailles au chapitre 6.
+Contenu du menu : reprendre, options, abandonner la run, quitter le jeu [A Confirmer: p]. Les controles associes a chaque support sont detailles au chapitre 6.
 
 ### 5.5 Interface d'inventaire
 
-L'ouverture et la navigation dans l'inventaire dependent du support :
+La navigation dans l'inventaire dependent du support :
 
-- **Souris** : clic gauche sur un emplacement pour utiliser l'item, survol pour afficher sa description [A VERIFIER].
-- **Manette** : onglet d'items, navigation a la croix directionnelle, confirmation et annulation par les boutons de face.
-- **Tactile** : bouton d'inventaire a l'ecran, puis appui sur l'item [A VERIFIER].
+- **Souris** : clic gauche sur un emplacement pour utiliser l'item, survol pour afficher sa description.
+- **Manette** : navigation a la croix directionnelle, confirmation et annulation par les boutons de face.
+- **Tactile** : bouton d'inventaire a l'ecran, puis appui sur l'item (court pour utiliser, long pour description, interrompu en glissant hors de l'item avant de lacher).
 
 Le detail du contenu de l'inventaire (items, equipement, runes) est decrit au chapitre 8.
 
@@ -350,14 +342,14 @@ Chaque verbe qui fait avancer le temps de jeu declenche un **tour** (voir chapit
 
 | Verbe | Description | Consomme un tour |
 |---|---|---|
-| Se deplacer | Deplacement d'une case sur la grille, dans l'une des 4 directions [A DEFINIR : deplacement en diagonale ?] | Oui |
+| Se deplacer | Deplacement d'une case sur la grille, dans l'une des 4 directions cardinales | Oui |
 | Attaquer au corps a corps | S'obtient en se deplacant vers une case occupee par un ennemi (pas de touche dediee) | Oui |
 | Attaquer a distance | Lance une hachette (stock limite) [A DEFINIR : visee, portee, direction] | Oui |
-| Utiliser un item | Utilise un item de l'inventaire (potion, etc.) | [A VERIFIER] |
-| Ouvrir l'inventaire / equipement | Consulte et gere les items et l'equipement | Non [A VERIFIER] |
+| Interagir (marchand, coffre, sortie) | Automatique en marchant sur la case | Non |
+| Acheter un item | Achete un item dans la fenetre du marchand (potion, etc.) | Oui |
+| Utiliser un item | Utilise un item de l'inventaire (potion, etc.) | Selon l'item |
 | Ouvrir le menu pause | Accede au menu pause | Non |
 | Confirmer / annuler | Valide ou annule dans les menus et l'interface marchand | Non |
-| Interagir (marchand, coffre, sortie) | [A DEFINIR : automatique en marchant sur la case, ou action dediee] | [A DEFINIR] |
 | Passer son tour (attendre) | [A DEFINIR : verbe non confirme] | Oui |
 
 ### 6.3 Clavier / souris
@@ -367,7 +359,7 @@ Chaque verbe qui fait avancer le temps de jeu declenche un **tour** (voir chapit
 | Se deplacer | Fleches directionnelles, ou ZQSD, ou WASD, ou pave numerique (8 haut, 2 bas, 4 gauche, 6 droite) |
 | Attaquer au corps a corps | Se deplacer vers l'ennemi |
 | Attaquer a distance | Barre d'espace, ou 5 du pave numerique |
-| Utiliser un item | Clic gauche sur l'item dans l'inventaire (survol : affiche la description) [A VERIFIER] |
+| Utiliser un item | Clic gauche sur l'item dans l'inventaire (survol : affiche la description) |
 | Menu pause | Echap |
 
 ### 6.4 Manette
@@ -376,26 +368,20 @@ Chaque verbe qui fait avancer le temps de jeu declenche un **tour** (voir chapit
 |---|---|
 | Se deplacer | Stick gauche ou croix directionnelle |
 | Attaquer au corps a corps | Se deplacer vers l'ennemi |
-| Attaquer a distance | Un bouton de face ou une gachette [A VERIFIER : Y ou RT] |
-| Utiliser un item | Ouvrir l'onglet d'items, naviguer a la croix directionnelle, confirmer [A VERIFIER : bouton d'ouverture de l'onglet] |
-| Confirmer / annuler | Bouton A pour confirmer, bouton B pour annuler [A VERIFIER] |
+| Attaquer a distance | Bouton de face de droite (B) [ou Y ou RT] |
+| Utiliser un item | Passer a la selection d'item avec bouton de face gauche (X) puis naviguer a la croix directionnelle |
+| Confirmer / annuler | Bouton de face bas (A) pour confirmer, bouton de face droit (B) pour annuler |
 | Menu pause | Bouton Start |
 
 ### 6.5 Tactile
 
 | Verbe | Controle |
 |---|---|
-| Se deplacer | Croix directionnelle virtuelle a l'ecran (bas gauche) |
+| Se deplacer | Croix directionnelle virtuelle a l'ecran |
 | Attaquer au corps a corps | Se deplacer vers l'ennemi |
-| Attaquer a distance | Bouton virtuel a l'ecran [A DEFINIR : position] |
-| Utiliser un item | Appui sur l'emplacement d'item dans le HUD ou l'inventaire [A VERIFIER] |
-| Menu pause | Bouton menu de type "burger" a l'ecran [A VERIFIER] |
-
-### 6.6 Regles d'interaction
-
-- **Une action par tour** : le joueur ne peut effectuer qu'une action par tour de jeu.
-- **Entree bloquante** : pendant la resolution d'un tour (animations, tour des ennemis),
-
+| Attaquer a distance | Bouton au centre de la croix virtuelle a l'ecran |
+| Utiliser un item | Appui sur l'emplacement d'item dans le HUD |
+| Menu pause | [A DEFINIR] |
 
 ## 7. Le personnage
 
@@ -403,7 +389,7 @@ Chaque verbe qui fait avancer le temps de jeu declenche un **tour** (voir chapit
 
 Futhark est le personnage jouable unique. C'est un.e guerrier.e viking mort.e au combat et accueilli.e au Valhalla. Son genre est volontairement non defini et son apparence reste neutre afin que chaque joueur puisse s'y identifier (ecriture epicene dans tous les textes du jeu).
 
-Le personnage n'a **pas de progression permanente** : tout est remis a zero a chaque run. Son evolution au cours d'une run vient uniquement de ce qu'il trouve (items, equipement, artefacts) et non d'un systeme de niveaux ou d'experience [A VERIFIER].
+Le personnage n'a **pas de progression permanente** : tout est remis a zero a chaque run. Son evolution au cours d'une run vient uniquement de ce qu'iel trouve (items, equipement, artefacts) et non d'un systeme de niveaux ou d'experience.
 
 ### 7.2 Statistiques et ressources
 
@@ -411,12 +397,11 @@ Le personnage n'a **pas de progression permanente** : tout est remis a zero a ch
 |---|---|---|
 | Points de vie (PV) | Vitalite : a 0, la run est perdue. Affiches sous la forme actuel/max (ex. 17/34) | [A DEFINIR] |
 | Bouffe | Ressource consommee a chaque tour. A 0, chaque tour coute 1 PV | [A DEFINIR] |
-| Monnaie | Sert a acheter des items aupres des marchands | [A DEFINIR] (probablement 0) |
-| Hachettes | Munitions de l'attaque a distance, en stock limite | [A DEFINIR] |
+| Monnaie | Sert a acheter des items aupres des marchands | 0 |
+| Hachettes | Munitions de l'attaque a distance | [A DEFINIR] |
 | Degats | Degats infliges par les attaques, modifies par l'arme et les bijoux | [A DEFINIR] |
 | Reduction de degats | Degats recus, modifies par l'armure | [A DEFINIR] |
-| Dexterite (Dex) | Statistique evoquee pour les bijoux, effet exact non precise | [A DEFINIR] |
-| Mana | Ressource de capacites magiques | [A DEFINIR] : systeme non confirme |
+| Dexterite (Dex) | Aptitude au touche et aux esquives | [A DEFINIR] |
 
 Les PV maximum peuvent etre augmentes par certains items (voir chapitre 8). Le PV de depart, la bouffe de depart et les formules de degats sont a calibrer lors de l'integration.
 
@@ -433,33 +418,26 @@ Le personnage dispose d'emblee de trois capacites de base. Il n'en acquiert pas 
 Capacites additionnelles possibles, issues des items :
 
 - **Soins** : potions de vie (voir chapitre 8).
-- **Conversion** : transformer de la bouffe en PV [A VERIFIER].
+- **Conversion** : transformer de la bouffe en PV.
 - **Runes** : effets elementaires (feu, glace, tonnerre, chaos...) lies a la mythologie nordique [A DEFINIR : effets coherents a explorer].
 
 ### 7.4 Inventaire et equipement
 
-L'inventaire contient **3 emplacements de base**, auxquels s'ajoutent des emplacements supplementaires donnes par l'equipement (la ceinture en ajoute 2). Chaque item est soit **actif** (utilise puis consomme ou active), soit **passif** (effet permanent tant qu'il est possede ou equipe), et occupe ou non une place [A VERIFIER : regle exacte d'occupation par item].
+L'inventaire contient **3 emplacements de base**, auxquels s'ajoutent des emplacements supplementaires donnes par l'equipement (la ceinture en ajoute 2). Chaque item est soit **actif** (utilise puis consomme ou active), soit **passif** (effet permanent tant qu'il est possede), et occupe ou non une place [A VERIFIER : regle exacte d'occupation par item].
 
-Quatre emplacements d'equipement existent :
+Trois emplacements cachés existent pour l'equipement :
 
 | Emplacement | Effet |
 |---|---|
 | Arme | Augmente les degats infliges |
 | Armure | Reduit les degats recus |
 | Ceinture | Augmente l'inventaire (+2 emplacements, une seule ceinture) |
-| Bijoux | Modifient la Dex et/ou les degats |
 
 Le detail des items et de l'equipement est au chapitre 8.
 
 ### 7.5 Artefacts
 
 A chaque royaume vaincu, Futhark recupere un **artefact** unique lie a ce royaume (voir chapitre 2). La nature de ces artefacts (equipement, relique passive, capacite, etc.) et leur effet en jeu sont [A DEFINIR]. Mjolnir, Brisingamen et la ceinture de force sont des candidats evoques dans les notes.
-
-### 7.6 Elements a trancher
-
-- Compagnons ou familiers (pets) : evoques dans les notes, non confirmes [A DEFINIR].
-- Systeme de glyphes ou de runes : [A DEFINIR].
-- Differences de personnage (classes, apparence selectionnable) : aucune prevue pour le moment [A VERIFIER].
 
 ## 8. Items et equipement
 
@@ -480,40 +458,28 @@ Les ressources ne sont pas des items d'inventaire : elles sont stockees dans des
 
 | Ressource | Role | Sources | Remarques |
 |---|---|---|---|
-| Bouffe | Consommee a chaque tour (voir chapitre 3) | Loot, marchands | Plusieurs valeurs de bouffe trouvables, de type petite / moyenne / grosse portion (idee de valeurs : 1 / 3 / 10) [A VERIFIER] |
-| Monnaie | Achats chez les marchands | Loot, monstres [A DEFINIR] | Valeur du loot croissante : petit < moyen < gros |
-| Hachettes | Munitions de l'attaque a distance | Loot, marchands [A DEFINIR] | Stock limite |
+| Bouffe | Consommee a chaque tour (voir chapitre 3) | Loot, marchands | Plusieurs valeurs de bouffe trouvables, de type petite / moyenne / grosse portion [A DEFINIR] |
+| Monnaie | Achats chez les marchands | Loot | 	Plusieurs valeurs de monnaie trouvables, de type petite / moyenne / grosse portion (idee de valeurs : 1 / 3 / 10) [A Confirmer]|
+| Hachettes | Munitions de l'attaque a distance | Loot, marchands | Plusieurs valeurs de munitions trouvables, de type moyenne / grosse portion (idee de valeurs : 3 / 5) [A Confirmer] |
 
 ### 8.3 Equipement
 
-Quatre emplacements d'equipement existent. Les items d'equipement sont **passifs**.
-
-| Emplacement | Effet | Actif / Passif | Occupe une place |
-|---|---|---|---|
-| Arme | Augmente les degats infliges | Passif | [A VERIFIER] (probablement non) |
-| Armure | Reduit les degats recus | Passif | [A VERIFIER] (probablement non) |
-| Ceinture | Ajoute 2 emplacements d'inventaire. Une seule ceinture a la fois | Passif | [A VERIFIER] (probablement non) |
-| Bijoux | Modifient la Dex et/ou les degats | Passif | [A VERIFIER] (probablement oui) |
-
-Nombre de bijoux equipables simultanement : [A DEFINIR]. Le remplacement d'un equipement (que devient l'ancien item) est [A DEFINIR].
+cf. 7.4
 
 ### 8.4 Consommables
 
 | Item | Effet | Actif / Passif | Occupe une place |
 |---|---|---|---|
 | Potion de vie | Rend une quantite moyenne de PV | Actif | Oui |
-| Grande potion de vie | Rend tous les PV et augmente un peu les PV maximum | Actif | [A VERIFIER] |
+| Grande potion de vie | Rend tous les PV et augmente un peu les PV maximum | Actif | Oui |
 | Item de transformation (nom [A DEFINIR]) | Transforme de la bouffe en PV (ratio 1 pour 1 envisage) | Actif | Oui |
+| Runes magiques | Items porteurs d'effets elementaires/magiques tel que feu, glace, tonnerre, chaos, peur,... | Actif | Oui |
 
-Note de conception : si l'item de transformation permet d'obtenir beaucoup de PV d'un coup, une limite par utilisation est a prevoir [A VERIFIER : mention partiellement illisible dans les notes].
+Note de conception : peut-etre, en plus de la consommation de nourriture, si trop d'utilisation d'un coup appliquer penalite comme lenteure digestive ?
 
 ### 8.5 Runes
 
 Les runes sont des items porteurs d'effets elementaires et magiques, inspires de la mythologie nordique. Les effets doivent rester coherents avec cette mythologie (travail d'exploration mythologique a faire).
-
-Pistes d'effets : feu, glace, tonnerre, chaos, peur [A VERIFIER : un mot illisible dans les notes, possiblement "fire"].
-
-Fonctionnement (actif ou passif, usage unique ou permanent, place occupee) : [A DEFINIR].
 
 ### 8.6 Artefacts
 
@@ -524,8 +490,8 @@ Chaque royaume vaincu donne un **artefact** unique (voir chapitres 2 et 7). Un a
 | Source | Description |
 |---|---|
 | Loot dans l'etage | Items et ressources dissemines dans les pieces de l'etage (generation procedurale) |
-| Marchands | Rencontres aleatoires dans l'etage. Proposent 4 items aleatoires contre de la monnaie [A VERIFIER] |
-| Monstres | Drop eventuel a la mort [A DEFINIR] |
+| Marchands | Rencontres aleatoires dans l'etage. Proposent 4 items aleatoires contre de la monnaie |
+| Monstres | Drop eventuel a la mort |
 | Boss | Artefact du royaume + recompense eventuelle [A DEFINIR] |
 
 ### 8.8 Elements a trancher
@@ -540,7 +506,7 @@ Chaque royaume vaincu donne un **artefact** unique (voir chapitres 2 et 7). Un a
 
 Les ennemis sont les principales sources d'opposition du jeu. Chaque ennemi obeit aux regles du tour par tour (voir chapitre 3) : a chaque tour de jeu declenche par le joueur, **chaque ennemi actif accomplit un tour**, c'est-a-dire **soit un deplacement, soit une attaque**.
 
-Les ennemis evoluent sur la meme grille que le joueur, dans la vue etage (voir chapitre 5). Il n'y a pas de scene de combat separee.
+Les ennemis evoluent sur la meme grille que le joueur.
 
 Les valeurs de statistiques (PV, degats, vitesse) sont [A DEFINIR] et seront calibrees lors de l'integration.
 
@@ -549,25 +515,17 @@ Les valeurs de statistiques (PV, degats, vitesse) sont [A DEFINIR] et seront cal
 | Element | Regle |
 |---|---|
 | Tour de jeu | 1 action par tour : deplacement **ou** attaque |
-| Attaque au corps a corps | Un ennemi attaque le joueur lorsqu'il se trouve sur une case adjacente [A VERIFIER : adjacence diagonale] |
+| Attaque au corps a corps | Un ennemi attaque le joueur lorsqu'il se trouve sur une case adjacente |
 | Attaque a distance | Certains ennemis peuvent attaquer de loin [A DEFINIR] |
 | Deplacement | Vers le joueur lorsqu'il est detecte [A DEFINIR : rayon de detection, pathfinding, comportement hors detection] |
-| Ordre de resolution | [A DEFINIR] : tous en meme temps ou un par un |
+| Ordre de resolution | Tous en meme temps |
 | Apparition | Placement procedural lors de la generation de l'etage (voir chapitre 10) |
 
 ### 9.3 Types d'ennemis
 
-Chaque biome possede un **set de monstres endemiques**, propre au royaume et coherent avec son ambiance et la mythologie nordique. Un meme monstre peut appartenir a plusieurs biomes [A DEFINIR].
-
-| Role | Description | Exemples |
-|---|---|---|
-| Monstre de base | Ennemi commun du biome, faible mais present en nombre | [A DEFINIR] |
-| Monstre a distance | Attaque de loin, oblige le joueur a se rapprocher ou a se mettre a couvert | [A DEFINIR] |
-| Monstre d'elite | Version plus resistante ou plus dangereuse, drop meilleur | [A DEFINIR] |
+Chaque biome possede un **set de monstres endemiques**, propre au royaume et coherent avec son ambiance et la mythologie nordique. D'autres monstres sont plus generaux et peuvent apparaitre dans n'importe quel biome.
 
 Le nombre de monstres par type et par biome, ainsi que leur description detaillee, seront ajoutes dans une version ulterieure de ce document. Chaque monstre devra y etre decrit avec : nom, biome, comportement, statistiques, drop, moyen d'en venir a bout.
-
-Pour la vertical slice, un seul biome est concerne : le jeu devra proposer le set de monstres correspondant (voir chapitre 12).
 
 ### 9.4 Score et recompenses
 
@@ -586,7 +544,7 @@ Un boss garde la sortie de chaque biome. C'est la **personne notoire** du royaum
 | Niflheim | Nidhogg (dragon) | |
 | Jotunheim | [A DEFINIR] | |
 | Helheim | Hel (deesse) | |
-| Svartalfheim (Nidavellir) | Alberich [A VERIFIER] | |
+| Svartalfheim (Nidavellir) | Alberich | |
 | Asgard | Odin | Boss final du jeu |
 
 Regles generales des boss :
@@ -609,8 +567,6 @@ Au-dela des ennemis, le joueur doit surmonter plusieurs contraintes :
 | Murs et geometrie des pieces | Les murs bloquent le deplacement et la vue ; le joueur doit trouver son chemin dans l'etage | Exploration, choix d'itineraire |
 | Sortie a decouvrir | L'etage est genere procedurellement, la sortie n'est pas connue au depart | Exploration, qui coute de la bouffe |
 | Mecaniques de biome | Contraintes propres a chaque royaume (froid, feu, obscurite...) | [A DEFINIR] |
-| Pieces
-
 
 ## 10. Niveaux (etages, generation, biomes)
 
@@ -640,16 +596,14 @@ Un etage est compose de **9 pieces disposees en matrice carree 3 x 3**. Chaque p
 [ P7 ]--[ P8 ]--[ P9 ]
 ```
 
-*(Schema indicatif : toutes les liaisons ne sont pas forcement presentes.)*
-
 | Element | Regle |
 |---|---|
 | Disposition | Matrice carree de 9 pieces (3 x 3) |
 | Taille des pieces | 1 a 7 cases de cote, variable d'une piece a l'autre |
-| Liaison | Couloirs entre pieces voisines (nombre et trace des couloirs : [A DEFINIR]) |
-| Connexite | Toutes les pieces utiles doivent etre atteignables depuis l'entree [A VERIFIER] |
-| Entree | Le joueur arrive par une case d'une piece (choix de la piece : [A DEFINIR]) |
-| Sortie | Une case de sortie placee dans une piece de l'etage (position : [A DEFINIR], distance minimale avec l'entree : [A DEFINIR]) |
+| Liaison | Couloirs entre pieces voisines (1 case de large, au milieu de chaque cote) |
+| Connexite | Les 12 connections existent toujours mais 2 piece peuvent fusionner le cas echeant |
+| Entree | Le joueur arrive par une case d'une piece (choix de la piece au hasard) |
+| Sortie | Une case de sortie placee dans une autre piece de l'etage (position au hasard, distance minimale avec l'entree : [A DEFINIR]) |
 
 ### 10.3 Contenu d'un etage
 
@@ -672,9 +626,7 @@ Principes a respecter par l'algorithme :
 1. **Aleatoire** : la disposition, les tailles de pieces, le contenu et la position de la sortie changent a chaque run.
 2. **Jouable** : chaque etage doit etre completable (entree reliee a la sortie par un chemin praticable).
 3. **Lisible** : la grille doit rester simple a lire dans la vue 2D du dessus (voir chapitre 5).
-4. **Reproductible** : une graine (seed) permet de regenerer le meme etage [A VERIFIER : utile pour le debug et le leaderboard].
-
-L'algorithme exact de generation est [A DEFINIR] (conception technique).
+4. **Reproductible** : une graine (seed) permet de regenerer le meme etage [A Confirmer].
 
 ### 10.5 Etage de boss
 
@@ -683,8 +635,6 @@ Le dernier etage d'un biome est consacre au boss de ce royaume. Sa structure (ar
 ### 10.6 Biomes
 
 Chaque biome correspond a un royaume. Les elements communs a tous les biomes : decor propre, set de monstres endemiques, boss, artefact, mecaniques de biome eventuelles.
-
-Palette visuelle generale evoquee dans les notes : bois, pierre, froid, neige, tonnerre, mer (voir chapitre 11).
 
 | Royaume | Ambiance | Pistes de decor | Boss |
 |---|---|---|---|
@@ -713,16 +663,14 @@ Les **mecaniques de biome** (regles specifiques a chaque royaume, par exemple le
 
 L'identite visuelle de Futhark's Adventure s'inspire de la culture nordique : materiaux bruts, climats rudes, ornements tribaux. Le style doit rester **lisible** : le jeu est un roguelike sur grille ou chaque case compte, le joueur doit identifier d'un coup d'oeil le terrain, les ennemis, le loot et les dangers.
 
-Le jeu est concu comme un hommage au studio Motion Twin (voir chapitre 1). [A VERIFIER : degre d'inspiration visuelle des jeux du studio]
-
 ### 11.2 Style visuel
 
 | Element | Choix |
 |---|---|
 | Rendu | **Pixel art** |
 | Perspective | **2D, vue du dessus**, sur grille (type minimap) |
-| Univers visuel | Bois, pierre, froid, neige, tonnerre, mer |
-| Texture / materiaux | Aspect brut [A VERIFIER : mots illisibles dans les notes] |
+| Univers visuel | [A DEFINIR] |
+| Texture / materiaux | Aspect brut |
 | Resolution de reference des sprites | [A DEFINIR] (taille de tuile, ex. 16 x 16 ou 32 x 32) |
 | Palette | [A DEFINIR] : une palette generale, declinee par biome |
 | Animations | [A DEFINIR] : deplacement, attaque, degats, mort |
@@ -733,7 +681,7 @@ L'interface reprend les codes de la culture nordique, tout en restant sobre pour
 
 | Element | Choix |
 |---|---|
-| Police de caractere | Police d'inspiration viking de type "Viking Normal" [A VERIFIER : nom exact et licence] |
+| Police de caractere | Police d'inspiration viking de type "Viking Normal" [A Confirmer] |
 | Forme des cadres et boutons | Bords **"casses"** : rectangles dont les angles sont coupes (formes octogonales) |
 | Ornements | **Motifs tribaux** : entrelacs, noeuds, frises geometriques repetees |
 | Format | 16:9 en paysage ; variante portrait pour le tactile (voir chapitre 5) |
@@ -773,7 +721,7 @@ L'ensemble du design sonore est [A DEFINIR].
 | Ambiances | [A DEFINIR] (ambiance propre a chaque biome) |
 | Voix | [A DEFINIR] (aucune prevue pour le moment) |
 
-Role du son dans le gameplay : les retours sonores doivent confirmer chaque action du tour (deplacement, coup porte, coup recu) afin de renforcer la lisibilite. [A VERIFIER]
+Role du son dans le gameplay : les retours sonores doivent confirmer chaque action du tour (deplacement, coup porte, coup recu) afin de renforcer la lisibilite.
 
 ### 11.7 Elements a trancher
 
@@ -781,3 +729,85 @@ Role du son dans le gameplay : les retours sonores doivent confirmer chaque acti
 - Nombre d'assets a produire pour la vertical slice : voir chapitre 12.
 - Options d'accessibilite visuelle (contraste, taille du texte, daltonisme) : [A DEFINIR].
 
+## 12. Vertical slice et roadmap
+
+### 12.1 Objectif de la vertical slice
+
+La vertical slice est une version jouable de bout en bout qui prouve que la boucle de jeu fonctionne : demarrer une run, explorer plusieurs etages generes procedurellement, combattre des monstres, gerer ses ressources, affronter un boss, puis voir son score au leaderboard. Elle correspond grosso modo au **premier biome** du jeu complet.
+
+Support cible : **PC** (clavier/souris ou/et manette). Les controles tactile sont decrits dans ce document mais ne font pas partie de la vertical slice.
+
+Royaume du premier biome : [A DEFINIR].
+
+### 12.2 Perimetre du MVP (Minimum Viable Product)
+
+Le MVP est la version minimale qui doit imperativement etre livree.
+
+| Domaine | Contenu du MVP |
+|---|---|
+| Generation | Plusieurs etages successifs generes procedurellement (pieces et couloirs, chapitre 10), le dernier etant un etage de boss |
+| Personnage joueur (PJ) | Deplacement, attaque au corps a corps, attaque a distance (hachettes), utilisation d'une potion |
+| Tour par tour | Systeme de tours complet : le joueur agit, puis les monstres et le boss agissent (chapitre 3) |
+| Ressources | Bouffe consommee a chaque tour, PV, hachettes, famine (a 0 de bouffe, 1 PV par tour) |
+| Monstres | Plusieurs types de monstres aux caracteristiques distinctes (chapitre 9) |
+| Boss | Un boss en fin de biome |
+| Loot | Nourriture, munitions d'attaque a distance (hachettes), potion simple |
+| HUD | Barre de vie, bouffe, hachettes, inventaire, score (chapitre 5) |
+| Ecran de demarrage | Ecran de lancement d'une run |
+| Fin de run | Ecran de victoire / defaite avec score (chapitre 4) |
+| Leaderboard | Enregistrement et affichage des scores [A DEFINIR : local ou en ligne] |
+
+Le MVP **ne contient pas** : monnaie, marchands, equipement, runes et sorts, grosses potions, familiers, autres biomes, Odin, artefacts.
+
+*Note : la liste du MVP n'est pas figee. Tout oubli sera ajoute en cours de developpement.*
+
+### 12.3 Elements hors MVP pour la vertical slice
+
+Dans le MVP, les elements suivants ne sont pas necessaires meme si des mentions apparaissent dans les autres chapitres : marchands et monnaie (affichee au HUD), items d'equipement, runes, ceinture, artefacts, pets, mecaniques de biome. Le HUD et les systemes devront etre concus pour accueillir ces ajouts sans refonte.
+
+### 12.4 Roadmap des ajouts
+
+Les paliers sont ordonnes par priorite. Chaque palier n'est aborde que si le precedent est termine et que le temps le permet.
+
+**Palier 0 - MVP**
+Voir 12.2.
+
+**Palier 1 - Premiere couche de profondeur** (objectif souhaite)
+
+- Une premiere arme physique (augmente les degats infliges)
+- Une premiere armure (reduit les degats recus)
+- Item de transformation de la bouffe en PV (nom [A DEFINIR])
+- Quelques **pierres runiques** permettant de lancer des sorts (effets [A DEFINIR])
+- Peut-etre : la ceinture (+2 emplacements d'inventaire)
+
+**Palier 2 - Economie**
+
+- Monnaie
+- Marchands (4 items aleatoires proposes, chapitre 8)
+
+**Palier 3 - Score et loot**
+
+- Lootables de score brut (petit / moyen / gros, chapitre 3)
+
+**Palier 4 - Consommables et magie**
+
+- Grosses potions de vie
+- Davantage de sorts
+
+**Palier 5 - Familiers**
+
+- Pets (si le temps le permet) [A DEFINIR]
+
+### 12.5 Jeu complet (apres la vertical slice)
+
+Pour reference, le jeu complet decrit dans ce document comprend, au-dela des paliers ci-dessus : les 8 autres biomes (un par royaume), leurs monstres endemiques et leurs boss, les artefacts uniques, les mecaniques de biome, l'etape finale en Asgard avec le combat contre Odin, ainsi que le support telephone. Leur planification est [A DEFINIR] une fois la vertical slice validee.
+
+### 12.6 Criteres de reussite de la vertical slice
+
+- Une run complete est jouable de l'ecran de demarrage jusqu'a l'ecran de fin, victoire ou defaite.
+- La boucle "explorer - combattre - gerer sa bouffe" est comprehensible sans explication.
+- Le score est enregistre et visible au leaderboard.
+- Chaque nouvelle run propose une disposition d'etages differente.
+- Les monstres sont distincts dans leur comportement et leurs statistiques.
+- Le boss constitue une difficulte marquante par rapport aux etages precedents.
+- Le jeu est stable sur PC [A DEFINIR : configuration minimale].
