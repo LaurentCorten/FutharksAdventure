@@ -14,7 +14,7 @@ Octobre 2026
 
 **USP :** [TODO: trouver mieux !]
 
-*Un **roguelike** pur au tour par tour, ou chaque pas coute de la bouffe et chaque choix compte.*
+*Un **roguelike** pur au tour par tour, ou chaque pas coute de la nourriture et chaque choix compte.*
 
 *Une descente a travers les **neuf royaumes** de la mythologie nordique, un biome et un boss par royaume.*
 
@@ -163,9 +163,9 @@ Un tour de jeu correspond donc a une action du joueur et a une action de chaque 
 
 Chaque tour de jeu coute **1 unite de nourriture**. La nourriture est la ressource qui limite le temps d'exploration : elle empeche le joueur de fouiller indefiniment.
 
-- Si le joueur n'a plus de bouffe, chaque tour coute **1 point de vie (PV)** a la place.
-- La bouffe se recupere en la trouvant (loot, marchands). Le stock de depart est [A DEFINIR].
-- Un item peut convertir de la bouffe en PV (ratio envisage 1 pour 1).
+- Si le joueur n'a plus de nourriture, chaque tour coute **1 point de vie (PV)** a la place.
+- La nourriture se recupere en la trouvant (loot, marchands). Le stock de depart est [A DEFINIR].
+- Un item peut convertir de la nourriture en PV (ratio envisage 1 pour 1).
 
 | Action | Consomme un tour | Autre cout |
 |---|---|---|
@@ -183,11 +183,11 @@ Entree -> Visite (loot) -> Rencontres -> Sortie
 ```
 
 1. **Entree** : le joueur arrive par une case d'une piece.
-2. **Visite** : il fouille l'etage pour trouver du loot (bouffe, items, equipement, monnaie).
+2. **Visite** : il fouille l'etage pour trouver du loot (nourriture, items, equipement, monnaie).
 3. **Rencontres** : il croise des **monstres** (combat) ou des **marchands** (achat d'items contre de la monnaie).
 4. **Sortie** : il localise la sortie de l'etage et la prend pour passer a l'etage suivant.
 
-La tension centrale est un arbitrage permanent : fouiller plus (plus de loot, donc plus de score et de survie) coute de la bouffe et expose a plus de combats, alors qu'avancer vite economise des ressources mais laisse du loot derriere.
+La tension centrale est un arbitrage permanent : fouiller plus (plus de loot, donc plus de score et de survie) coute de la nourriture et expose a plus de combats, alors qu'avancer vite economise des ressources mais laisse du loot derriere.
 
 ### 3.4 Boucle du biome
 
@@ -235,7 +235,7 @@ Terminer le jeu n'est donc pas le but final : c'est la qualite de la run (le sco
 Le joueur perd la run lorsque ses **points de vie (PV) tombent a 0**. Les causes possibles sont :
 
 - les degats infliges par un monstre ou un boss ;
-- la **famine** : lorsque la bouffe est a 0, chaque tour coute 1 PV, ce qui peut mener a la mort sans qu'aucun ennemi n'intervienne ;
+- la **famine** : lorsque la nourriture est a 0, chaque tour coute 1 PV, ce qui peut mener a la mort sans qu'aucun ennemi n'intervienne ;
 - les autres sources de degats (pieges, mecaniques de biome) [A DEFINIR].
 
 La mort n'est pas une fin narrative : Futhark est deja mort, heros du Valhalla, et une nouvelle run commence apres l'ecran de fin. Le score de la run interrompue est enregistre au leaderboard comme celui d'une run reussie, s'il est suffisant.
@@ -297,7 +297,7 @@ Le HUD affiche en permanence les informations vitales de la run. Il est concu en
 | Element | Description | Position (paysage) |
 |---|---|---|
 | Barre de vie | Barre de PV avec valeur numerique (ex. 17/34) | Haut gauche |
-| Reserve de bouffe | Compteur de bouffe restante (ex. 320) | Sous la barre de vie |
+| Reserve de nourriture | Compteur de nourriture restante (ex. 320) | Sous la barre de vie |
 | Monnaie | Compteur de monnaie (ex. 64) | Sous la barre de vie |
 | Objets lancables | Nombre de hachettes disponibles pour l'attaque a distance (ex. 5) | Sous la barre de vie |
 | Inventaire | Emplacements d'items utilisables (jusqu'a 5 affiches) | Haut droite, en ligne |
@@ -305,7 +305,7 @@ Le HUD affiche en permanence les informations vitales de la run. Il est concu en
 
 Notes de conception :
 
-- **Inventaire** : le personnage dispose de 3 emplacements de base, extensibles par l'equipement (voir chapitre 8). Le HUD prevoit jusqu'a 5 emplacements affiches [A VERIFIER].
+- **Inventaire** : le personnage dispose de 3 emplacements de base, extensibles par l'equipement (voir chapitre 8). Le HUD prevoit jusqu'a 5 emplacements affiches.
 - **Variante portrait (tactile)** : barre de vie et compteurs en haut, colonne d'emplacements d'inventaire sur le cote droit en burger menu, croix directionnelle virtuelle en bas au centre, score tout en bas.
 
 ### 5.4 Menu pause
@@ -336,7 +336,7 @@ Le jeu est controle a l'aide du **nouvel Input System d'Unity**. Les actions du 
 
 Supports vises : **clavier/souris** (vertical slice), **manette** et **tactile** (description complete, implementation ulterieure).
 
-Chaque verbe qui fait avancer le temps de jeu declenche un **tour** (voir chapitre 3) : les ennemis jouent apres le joueur et la bouffe est consommee.
+Chaque verbe qui fait avancer le temps de jeu declenche un **tour** (voir chapitre 3) : les ennemis jouent apres le joueur et la nourriture est consommee.
 
 ### 6.2 Liste des verbes
 
@@ -396,14 +396,14 @@ Le personnage n'a **pas de progression permanente** : tout est remis a zero a ch
 | Element | Role | Valeur de depart |
 |---|---|---|
 | Points de vie (PV) | Vitalite : a 0, la run est perdue. Affiches sous la forme actuel/max (ex. 17/34) | [A DEFINIR] |
-| Bouffe | Ressource consommee a chaque tour. A 0, chaque tour coute 1 PV | [A DEFINIR] |
+| Nourriture | Ressource consommee a chaque tour. A 0, chaque tour coute 1 PV | [A DEFINIR] |
 | Monnaie | Sert a acheter des items aupres des marchands | 0 |
 | Hachettes | Munitions de l'attaque a distance | [A DEFINIR] |
 | Degats | Degats infliges par les attaques, modifies par l'arme et les bijoux | [A DEFINIR] |
 | Reduction de degats | Degats recus, modifies par l'armure | [A DEFINIR] |
 | Dexterite (Dex) | Aptitude au touche et aux esquives | [A DEFINIR] |
 
-Les PV maximum peuvent etre augmentes par certains items (voir chapitre 8). Le PV de depart, la bouffe de depart et les formules de degats sont a calibrer lors de l'integration.
+Les PV maximum peuvent etre augmentes par certains items (voir chapitre 8). Le PV de depart, la nourriture de depart et les formules de degats sont a calibrer lors de l'integration.
 
 ### 7.3 Capacites
 
@@ -418,14 +418,14 @@ Le personnage dispose d'emblee de trois capacites de base. Il n'en acquiert pas 
 Capacites additionnelles possibles, issues des items :
 
 - **Soins** : potions de vie (voir chapitre 8).
-- **Conversion** : transformer de la bouffe en PV.
+- **Conversion** : transformer de la nourriture en PV.
 - **Runes** : effets elementaires (feu, glace, tonnerre, chaos...) lies a la mythologie nordique [A DEFINIR : effets coherents a explorer].
 
 ### 7.4 Inventaire et equipement
 
-L'inventaire contient **3 emplacements de base**, auxquels s'ajoutent des emplacements supplementaires donnes par l'equipement (la ceinture en ajoute 2). Chaque item est soit **actif** (utilise puis consomme ou active), soit **passif** (effet permanent tant qu'il est possede), et occupe ou non une place [A VERIFIER : regle exacte d'occupation par item].
+L'inventaire contient **3 emplacements de base**, auxquels s'ajoutent eventuellement des emplacements supplementaires donnes par l'equipement (la ceinture en ajoute 2). Chaque item est soit **actif** (utilise puis consomme ou active), soit **passif** (effet permanent tant qu'il est possede).
 
-Trois emplacements cachés existent pour l'equipement :
+En sus, trois emplacements caches existent pour l'equipement :
 
 | Emplacement | Effet |
 |---|---|
@@ -443,10 +443,11 @@ A chaque royaume vaincu, Futhark recupere un **artefact** unique lie a ce royaum
 
 ### 8.1 Principe general
 
-Tout ce que le joueur trouve ou achete est un **item** ou une ressource. Chaque item possede deux proprietes de conception :
+Tout ce que le joueur trouve ou achete est un **item** ou une ressource. Chaque item possede trois proprietes de conception :
 
 - **Actif / Passif** : un item *actif* est utilise volontairement par le joueur (puis consomme ou declenche) ; un item *passif* agit en permanence tant qu'il est equipe ou possede.
 - **Occupe une place** : indique si l'item prend un emplacement de l'inventaire (oui / non).
+- **Consommable** : indique si l'item est consomme a l'utilisation ou reste utilisable.
 
 L'inventaire contient **3 emplacements de base**, auxquels s'ajoutent **2 emplacements** donnes par la ceinture (voir 8.3). Il peut donc contenir jusqu'a 5 items qui occupent une place. Le HUD affiche jusqu'a 5 emplacements (voir chapitre 5).
 
@@ -458,24 +459,31 @@ Les ressources ne sont pas des items d'inventaire : elles sont stockees dans des
 
 | Ressource | Role | Sources | Remarques |
 |---|---|---|---|
-| Bouffe | Consommee a chaque tour (voir chapitre 3) | Loot, marchands | Plusieurs valeurs de bouffe trouvables, de type petite / moyenne / grosse portion [A DEFINIR] |
-| Monnaie | Achats chez les marchands | Loot | 	Plusieurs valeurs de monnaie trouvables, de type petite / moyenne / grosse portion (idee de valeurs : 1 / 3 / 10) [A Confirmer]|
+| Nourriture | Consommee a chaque tour (voir chapitre 3) | Loot, marchands | Plusieurs valeurs de nourriture trouvables, de type petite / moyenne / grosse portion [A DEFINIR] |
+| Monnaie | Achats chez les marchands | Loot | Plusieurs valeurs de monnaie trouvables, de type petite / moyenne / grosse portion (idee de valeurs : 1 / 3 / 10) [A Confirmer]|
 | Hachettes | Munitions de l'attaque a distance | Loot, marchands | Plusieurs valeurs de munitions trouvables, de type moyenne / grosse portion (idee de valeurs : 3 / 5) [A Confirmer] |
 
 ### 8.3 Equipement
 
-cf. 7.4
+cf. 7.4 et 8.4
 
-### 8.4 Consommables
+### 8.4 Equipements et Consommables [WIP]
 
-| Item | Effet | Actif / Passif | Occupe une place |
-|---|---|---|---|
-| Potion de vie | Rend une quantite moyenne de PV | Actif | Oui |
-| Grande potion de vie | Rend tous les PV et augmente un peu les PV maximum | Actif | Oui |
-| Item de transformation (nom [A DEFINIR]) | Transforme de la bouffe en PV (ratio 1 pour 1 envisage) | Actif | Oui |
-| Runes magiques | Items porteurs d'effets elementaires/magiques tel que feu, glace, tonnerre, chaos, peur,... | Actif | Oui |
+| Item | Effet | Actif / Passif | Occupe une place | Consommable |
+|---|---|---|---|---|
+| Potion de vie | Rend une quantite moyenne de PV | Actif | Oui | Oui |
+| Grande potion de vie | Rend tous les PV et augmente un peu les PV maximum | Actif | Oui | Oui |
+| Item de transformation (nom [A DEFINIR])* | Transforme de la nourriture en PV (ratio 1 pour 1 envisage) | Actif | Oui | Non |
+| Bijou de Dexterite | Augmente les chances de touche et d'esquive | Passif | Oui | Non |
+| Bijou de Force | Augmente les degats emits | Passif | Oui | Non |
+| Dague | Arme de niveau 1, augmente un peu les degats emits | Passif | Non | Non |
+| Protege bras en cuir | Armure de niveau 1, diminue un peu les degats recus | Passif | Non | Non |
+| Ceinture** | Rajoute 2 emplacement d'inventaire | Passif | Non | Non |
+| Runes | Items porteurs d'effets elementaires/magiques tel que feu, glace, tonnerre, chaos, peur,... [A DEFINIR] | Actif | Oui | Oui |
 
-Note de conception : peut-etre, en plus de la consommation de nourriture, si trop d'utilisation d'un coup appliquer penalite comme lenteure digestive ?
+
+*Peut-etre, en plus de la consommation de nourriture, si trop d'utilisation d'un coup appliquer penalite comme lenteure digestive ?  
+**Sera peut-etre fusionne avec la ceinture de force
 
 ### 8.5 Runes
 
@@ -562,10 +570,10 @@ Au-dela des ennemis, le joueur doit surmonter plusieurs contraintes :
 
 | Obstacle | Description | Moyen d'en venir a bout |
 |---|---|---|
-| Famine | La bouffe baisse a chaque tour ; a 0, chaque tour coute 1 PV | Trouver ou acheter de la bouffe, ne pas gaspiller les tours |
+| Famine | La nourriture baisse a chaque tour ; a 0, chaque tour coute 1 PV | Trouver ou acheter de la nourriture, ne pas gaspiller les tours |
 | Ressources limitees | Hachettes et items en nombre restreint, inventaire limite | Choisir quoi garder, quoi acheter, quand utiliser |
 | Murs et geometrie des pieces | Les murs bloquent le deplacement et la vue ; le joueur doit trouver son chemin dans l'etage | Exploration, choix d'itineraire |
-| Sortie a decouvrir | L'etage est genere procedurellement, la sortie n'est pas connue au depart | Exploration, qui coute de la bouffe |
+| Sortie a decouvrir | L'etage est genere procedurellement, la sortie n'est pas connue au depart | Exploration, qui coute de la nourriture |
 | Mecaniques de biome | Contraintes propres a chaque royaume (froid, feu, obscurite...) | [A DEFINIR] |
 
 ## 10. Niveaux (etages, generation, biomes)
@@ -613,7 +621,7 @@ Le contenu est place **de maniere procedurale** lors de la generation :
 |---|---|---|
 | Monstres | Rencontres de combat | Selon le set endemique du biome (chapitre 9) |
 | Marchands | Rencontres d'achat | Proposent 4 items aleatoires (chapitre 8) |
-| Loot | Items et ressources au sol | Bouffe, monnaie, hachettes, items (chapitre 8) |
+| Loot | Items et ressources au sol | Nourriture, monnaie, hachettes, items (chapitre 8) |
 | Sortie | Passage a l'etage suivant | Toujours presente |
 | Boss | Present uniquement au dernier etage d'un biome | Chapitre 9 |
 
@@ -706,9 +714,9 @@ Certains assets ont un role de lisibilite directe pour le joueur et doivent etre
 
 - **Joueur et ennemis** : distinguables immediatement des tuiles de decor.
 - **Sortie de l'etage** : doit etre identifiable clairement.
-- **Loot et marchands** : apparence distincte (bouffe, monnaie, hachettes, items) [A DEFINIR].
+- **Loot et marchands** : apparence distincte (nourriture, monnaie, hachettes, items) [A DEFINIR].
 - **Indicateurs de combat** : degats subis et infliges, mort des ennemis [A DEFINIR].
-- **Icones du HUD** : barre de vie, bouffe, monnaie, hachettes, emplacements d'inventaire (chapitre 5).
+- **Icones du HUD** : barre de vie, nourriture, monnaie, hachettes, emplacements d'inventaire (chapitre 5).
 
 ### 11.6 Audio
 
@@ -748,16 +756,16 @@ Le MVP est la version minimale qui doit imperativement etre livree.
 | Generation | Plusieurs etages successifs generes procedurellement (pieces et couloirs, chapitre 10), le dernier etant un etage de boss |
 | Personnage joueur (PJ) | Deplacement, attaque au corps a corps, attaque a distance (hachettes), utilisation d'une potion |
 | Tour par tour | Systeme de tours complet : le joueur agit, puis les monstres et le boss agissent (chapitre 3) |
-| Ressources | Bouffe consommee a chaque tour, PV, hachettes, famine (a 0 de bouffe, 1 PV par tour) |
+| Ressources | Nourriture consommee a chaque tour, PV, hachettes, famine (a 0 de nourriture, 1 PV par tour) |
 | Monstres | Plusieurs types de monstres aux caracteristiques distinctes (chapitre 9) |
 | Boss | Un boss en fin de biome |
-| Loot | Nourriture, munitions d'attaque a distance (hachettes), potion simple |
-| HUD | Barre de vie, bouffe, hachettes, inventaire, score (chapitre 5) |
+| Loot | Nourriture, munitions d'attaque a distance (hachettes), potion de vie |
+| HUD | Barre de vie, nourriture, hachettes, inventaire, score (chapitre 5) |
 | Ecran de demarrage | Ecran de lancement d'une run |
 | Fin de run | Ecran de victoire / defaite avec score (chapitre 4) |
 | Leaderboard | Enregistrement et affichage des scores [A DEFINIR : local ou en ligne] |
 
-Le MVP **ne contient pas** : monnaie, marchands, equipement, runes et sorts, grosses potions, familiers, autres biomes, Odin, artefacts.
+Le MVP **ne contient pas** : monnaie, marchands, equipement, runes et sorts, Grandes potions de vie, familiers, autres biomes, Odin, artefacts.
 
 *Note : la liste du MVP n'est pas figee. Tout oubli sera ajoute en cours de developpement.*
 
@@ -776,8 +784,8 @@ Voir 12.2.
 
 - Une premiere arme physique (augmente les degats infliges)
 - Une premiere armure (reduit les degats recus)
-- Item de transformation de la bouffe en PV (nom [A DEFINIR])
-- Quelques **pierres runiques** permettant de lancer des sorts (effets [A DEFINIR])
+- Item de transformation de la nourriture en PV (nom [A DEFINIR])
+- Quelques **runes** permettant de lancer des sorts (effets [A DEFINIR])
 - Peut-etre : la ceinture (+2 emplacements d'inventaire)
 
 **Palier 2 - Economie**
@@ -805,7 +813,7 @@ Pour reference, le jeu complet decrit dans ce document comprend, au-dela des pal
 ### 12.6 Criteres de reussite de la vertical slice
 
 - Une run complete est jouable de l'ecran de demarrage jusqu'a l'ecran de fin, victoire ou defaite.
-- La boucle "explorer - combattre - gerer sa bouffe" est comprehensible sans explication.
+- La boucle "explorer - combattre - gerer sa nourriture" est comprehensible sans explication.
 - Le score est enregistre et visible au leaderboard.
 - Chaque nouvelle run propose une disposition d'etages differente.
 - Les monstres sont distincts dans leur comportement et leurs statistiques.
