@@ -475,8 +475,8 @@ cf. 7.4 et 8.4
 | Grande potion de vie | Rend tous les PV et augmente un peu les PV maximum | Actif | Oui | Oui |
 | Item de transformation (nom [A DEFINIR])* | Transforme de la nourriture en PV (ratio 1 pour 1 envisage) | Actif | Oui | Non |
 | Bijou de Dexterite | Augmente les chances de touche et d'esquive | Passif | Oui | Non |
-| Bijou de Force | Augmente les degats emits | Passif | Oui | Non |
-| Dague | Arme de niveau 1, augmente un peu les degats emits | Passif | Non | Non |
+| Bijou de Force | Augmente les degats infliges | Passif | Oui | Non |
+| Dague | Arme de niveau 1, augmente un peu les degats infliges | Passif | Non | Non |
 | Protege bras en cuir | Armure de niveau 1, diminue un peu les degats recus | Passif | Non | Non |
 | Ceinture** | Rajoute 2 emplacement d'inventaire | Passif | Non | Non |
 | Runes | Items porteurs d'effets elementaires/magiques tel que feu, glace, tonnerre, chaos, peur,... [A DEFINIR] | Actif | Oui | Oui |
