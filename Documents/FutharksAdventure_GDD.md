@@ -268,36 +268,49 @@ Le contenu exact de l'ecran, son ton visuel (differenciation entre victoire et d
 | Vue | Description | Camera |
 |---|---|---|
 | Menu principal | Point d'entree du jeu : lancer une run, options, leaderboard, quitter [A Confirmer] | Fixe |
-| Vue etage (vue principale)| Vue 2D du dessus, sur grille, dans laquelle le joueur se deplace, combat et loote | Centree sur le joueur |
-| Interface marchand | Ecran d'achat ouvert lors d'une rencontre avec un marchand (4 items aleatoires proposes) | Fixe (superposee a la vue etage) |
-| Inventaire / equipement | Consultation et gestion des items et de l'equipement du personnage | Fixe (superposee a la vue etage) |
-| Menu pause | Menu accessible en cours de run | Fixe (superposee a la vue etage) |
+| Vue etage (vue principale) | Vue 2D du dessus, sur grille, dans laquelle le joueur se deplace, combat et loote. Le HUD, l'inventaire et la bulle du marchand en font partie | Centree sur le joueur |
+| Menu pause | Menu accessible en cours de run, superpose a la vue etage | Fixe |
 | Ecran de fin de run | Resultat, score detaille et leaderboard (voir chapitre 4) | Fixe |
-
 
 ### 5.2 Enchainement des vues
 
 ```
-Menu principal -> Vue etage <-> Interface marchand
-                     |      <-> Inventaire / equipement
-                     |      <-> Menu pause
+Menu principal -> Vue etage <-> Menu pause
+                     |
                      v
               Ecran de fin de run -> Menu principal ou nouvelle run
 ```
 
-- L'inventaire, le menu pause et l'interface marchand s'ouvrent par-dessus la vue etage et s'y referment sans la quitter.
-- L'ouverture de ces ecrans ne fait pas avancer le temps de jeu [A VERIFIER].
-- Le passage d'un etage a l'autre se fait par la case de sortie, sans ecran intermediaire [Ecran de chargement théoriquement jamais rencontre a prevoir].
-- Le passage d'un biome a l'autre (apres un boss) peut etre marque par un ecran dedie.
+- Le jeu etant au tour par tour, le temps ne progresse que lorsque le joueur agit (voir chapitre 3) : afficher le menu pause ou la bulle du marchand ne fait pas avancer le temps.
+- Le passage d'un etage a l'autre se fait par la case de sortie, sans ecran intermediaire [A DEFINIR : ecran de chargement].
+- Le passage d'un biome a l'autre (apres un boss) peut etre marque par un ecran dedie [A DEFINIR].
 
-### 5.3 HUD de la vue etage
+### 5.3 Elements de la vue etage
+
+**Bulle du marchand**
+
+Lorsque le joueur entre en contact avec un marchand, une bulle de dialogue apparait, reliee au marchand. Elle contient **4 propositions d'achat** et disparait des que le joueur s'eloigne. Elle ne couvre qu'une petite partie de l'ecran : la vue reste celle du jeu, sans changement d'ecran ni interruption.
+
+- Definition du "contact" (case adjacente, ou deplacement vers le marchand) : [A DEFINIR].
+- Selection d'une proposition selon le support (souris, manette, tactile) : [A DEFINIR] (voir chapitre 6).
+- Un achat consomme un tour (voir chapitre 6).
+
+**Inventaire**
+
+L'inventaire n'existe que dans le HUD (voir 5.4) : il n'y a pas d'ecran dedie. Les emplacements d'equipement (arme, armure, ceinture) sont caches et non accessibles au joueur (voir chapitre 7).
+
+- **Souris** : clic gauche sur un emplacement pour utiliser l'item, survol pour afficher sa description.
+- **Manette** : navigation a la croix directionnelle, confirmation et annulation par les boutons de face.
+- **Tactile** : appui court pour utiliser, appui long pour afficher la description, utilisation annulee en glissant hors de l'item avant de lacher.
+
+### 5.4 HUD de la vue etage
 
 Le HUD affiche en permanence les informations vitales de la run. Il est concu en **16:9 (paysage)** pour le PC, avec une variante **portrait** envisagee pour le telephone.
 
 | Element | Description | Position (paysage) |
 |---|---|---|
 | Barre de vie | Barre de PV avec valeur numerique (ex. 17/34) | Haut gauche |
-| Reserve de nourriture | Compteur de nourriture restante (ex. 320) | Sous la barre de vie |
+| Reserve de bouffe | Compteur de bouffe restante (ex. 320) | Sous la barre de vie |
 | Monnaie | Compteur de monnaie (ex. 64) | Sous la barre de vie |
 | Objets lancables | Nombre de hachettes disponibles pour l'attaque a distance (ex. 5) | Sous la barre de vie |
 | Inventaire | Emplacements d'items utilisables (jusqu'a 5 affiches) | Haut droite, en ligne |
@@ -305,10 +318,10 @@ Le HUD affiche en permanence les informations vitales de la run. Il est concu en
 
 Notes de conception :
 
-- **Inventaire** : le personnage dispose de 3 emplacements de base, extensibles par l'equipement (voir chapitre 8). Le HUD prevoit jusqu'a 5 emplacements affiches.
+- **Inventaire** : le personnage dispose de 3 emplacements de base, extensibles par la ceinture (voir chapitre 8). Le HUD prevoit jusqu'a 5 emplacements affiches.
 - **Variante portrait (tactile)** : barre de vie et compteurs en haut, colonne d'emplacements d'inventaire sur le cote droit en burger menu, croix directionnelle virtuelle en bas au centre, score tout en bas.
 
-### 5.4 Menu pause
+### 5.5 Menu pause
 
 Le menu pause est accessible a tout moment pendant la vue etage :
 
@@ -316,17 +329,9 @@ Le menu pause est accessible a tout moment pendant la vue etage :
 - **Manette** : bouton Start
 - **Tactile** : bouton menu a l'ecran [A DEFINIR]
 
-Contenu du menu : reprendre, options, abandonner la run, quitter le jeu [A Confirmer: p]. Les controles associes a chaque support sont detailles au chapitre 6.
+Contenu du menu : reprendre, options, abandonner la run, quitter le jeu [A Confirmer].
 
-### 5.5 Interface d'inventaire
-
-La navigation dans l'inventaire dependent du support :
-
-- **Souris** : clic gauche sur un emplacement pour utiliser l'item, survol pour afficher sa description.
-- **Manette** : navigation a la croix directionnelle, confirmation et annulation par les boutons de face.
-- **Tactile** : bouton d'inventaire a l'ecran, puis appui sur l'item (court pour utiliser, long pour description, interrompu en glissant hors de l'item avant de lacher).
-
-Le detail du contenu de l'inventaire (items, equipement, runes) est decrit au chapitre 8.
+Presentation : ecran plein ecran, ou pop up central avec le reste de l'ecran grise et le jeu visible par transparence [A DEFINIR]. Les controles associes a chaque support sont detailles au chapitre 6.
 
 ## 6. Controles et verbes
 
@@ -463,11 +468,7 @@ Les ressources ne sont pas des items d'inventaire : elles sont stockees dans des
 | Monnaie | Achats chez les marchands | Loot | Plusieurs valeurs de monnaie trouvables, de type petite / moyenne / grosse portion (idee de valeurs : 1 / 3 / 10) [A Confirmer]|
 | Hachettes | Munitions de l'attaque a distance | Loot, marchands | Plusieurs valeurs de munitions trouvables, de type moyenne / grosse portion (idee de valeurs : 3 / 5) [A Confirmer] |
 
-### 8.3 Equipement
-
-cf. 7.4 et 8.4
-
-### 8.4 Equipements et Consommables [WIP]
+### 8.3 Equipements et Consommables
 
 | Item | Effet | Actif / Passif | Occupe une place | Consommable |
 |---|---|---|---|---|
@@ -485,15 +486,15 @@ cf. 7.4 et 8.4
 *Peut-etre, en plus de la consommation de nourriture, si trop d'utilisation d'un coup appliquer penalite comme lenteure digestive ?  
 **Sera peut-etre fusionne avec la ceinture de force
 
-### 8.5 Runes
+### 8.4 Runes
 
 Les runes sont des items porteurs d'effets elementaires et magiques, inspires de la mythologie nordique. Les effets doivent rester coherents avec cette mythologie (travail d'exploration mythologique a faire).
 
-### 8.6 Artefacts
+### 8.5 Artefacts
 
 Chaque royaume vaincu donne un **artefact** unique (voir chapitres 2 et 7). Un artefact est un item special, non achetable. Sa nature et son effet sont [A DEFINIR]. Candidats evoques : Mjolnir, Brisingamen, ceinture de force.
 
-### 8.7 Sources d'items
+### 8.6 Sources d'items
 
 | Source | Description |
 |---|---|
@@ -502,7 +503,7 @@ Chaque royaume vaincu donne un **artefact** unique (voir chapitres 2 et 7). Un a
 | Monstres | Drop eventuel a la mort |
 | Boss | Artefact du royaume + recompense eventuelle [A DEFINIR] |
 
-### 8.8 Elements a trancher
+### 8.7 Elements a trancher
 
 - Familiers (pets) : evoques dans les notes, non confirmes [A DEFINIR].
 - Rarete des items et tables de loot par biome : [A DEFINIR].
