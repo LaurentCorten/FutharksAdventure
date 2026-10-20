@@ -1,10 +1,7 @@
-# FUTHARK'S ADVENTURE - *A Motion Twin Tribute*
+# FUTHARK'S ADVENTURE - *A Motion Twin Tribute* : Game Design Document 20 octobre 2026
 
 
-
-Octobre 2026
-
-**Auteur :** [A COMPLETER]
+**Auteur :** Laurent Corten
 
 **Engine :** Unity 6 (C#)
 
@@ -12,13 +9,7 @@ Octobre 2026
 
 **Genre :** Roguelike - Tour par tour - Grid based
 
-**USP :** [TODO: trouver mieux !]
-
-*Un **roguelike** pur au tour par tour, ou chaque pas coute de la nourriture et chaque choix compte.*
-
-*Une descente a travers les **neuf royaumes** de la mythologie nordique, un biome et un boss par royaume.*
-
-*Une course au score : la vraie victoire est la premiere place du leaderboard.*
+**USP :** [TBA]
 
 ---
 ## Table des matières
