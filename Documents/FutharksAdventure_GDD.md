@@ -164,7 +164,7 @@ Un tour de jeu correspond donc a une action du joueur et a une action de chaque 
 Chaque tour de jeu coute **1 unite de nourriture**. La nourriture est la ressource qui limite le temps d'exploration : elle empeche le joueur de fouiller indefiniment.
 
 - Si le joueur n'a plus de nourriture, chaque tour coute **1 point de vie (PV)** a la place.
-- La nourriture se recupere en la trouvant (loot, marchands). Le stock de depart est [A DEFINIR].
+- La nourriture se recupere en la trouvant (loot, marchands). Le stock de depart est de **150** (valeur provisoire, variable serialisee, a equilibrer).
 - Un item peut convertir de la nourriture en PV (ratio envisage 1 pour 1).
 
 | Action | Consomme un tour | Autre cout |
@@ -191,7 +191,7 @@ La tension centrale est un arbitrage permanent : fouiller plus (plus de loot, do
 
 ### 3.4 Boucle du biome
 
-Les etages sont regroupes en biomes, un biome par royaume. Le joueur enchaine les etages du biome, puis affronte le **boss** du royaume au dernier etage. Vaincre le boss permet de recuperer l'**artefact** du royaume et d'ouvrir l'acces au biome suivant. Le nombre d'etages par biome est [A DEFINIR].
+Les etages sont regroupes en biomes, un biome par royaume. Le joueur enchaine les etages du biome, puis affronte le **boss** du royaume au dernier etage. Vaincre le boss permet de recuperer l'**artefact** du royaume et d'ouvrir l'acces au biome suivant. Le nombre d'etages par biome est **3 a 5 etages normaux + 1 etage de boss** [A Confirmer].
 
 ### 3.5 Boucle de la run
 
@@ -214,6 +214,8 @@ Le score mesure la performance d'une run et determine le classement au leaderboa
 | Bonus de loot | Points selon la valeur du loot (petit / moyen / gros) |
 
 La valeur brute du loot croit avec sa taille (petit < moyen < gros). Les formules et la ponderation entre ces trois sources sont [A DEFINIR].
+
+Le leaderboard est enregistrer en **local** (fichier JSON) et comprends le **Top 10** des meilleurs scores.
 
 ## 4. Conditions de victoire / defaite
 
@@ -253,7 +255,7 @@ A la fin de chaque run (victoire ou defaite), le jeu affiche un ecran de fin ave
 - le classement au **leaderboard** ;
 - les actions disponibles : recommencer une run, quitter le jeu.
 
-Le contenu exact de l'ecran, son ton visuel (differenciation entre victoire et defaite) et le fonctionnement du leaderboard (local ou en ligne, nombre d'entrees, anti-triche) sont [A DEFINIR].
+Le contenu exact de l'ecran et son ton visuel (differenciation entre victoire et defaite) sont [A DEFINIR].
 
 ### 4.5 Limites du jeu
 
@@ -287,6 +289,10 @@ Menu principal -> Vue etage <-> Menu pause
 
 ### 5.3 Elements de la vue etage
 
+**Visibilite** 
+
+Nombre fixe de lignes et colonnes affichees avec le joueur toujours au centre, toute case affichee est revelee (pas de brouillard), canvas de jeu limite par un cadre avec decorations [A DEFINIR]. [A Confirmer]
+
 **Bulle du marchand**
 
 Lorsque le joueur entre en contact avec un marchand, une bulle de dialogue apparait, reliee au marchand. Elle contient **4 propositions d'achat** et disparait des que le joueur s'eloigne. Elle ne couvre qu'une petite partie de l'ecran : la vue reste celle du jeu, sans changement d'ecran ni interruption.
@@ -310,7 +316,7 @@ Le HUD affiche en permanence les informations vitales de la run. Il est concu en
 | Element | Description | Position (paysage) |
 |---|---|---|
 | Barre de vie | Barre de PV avec valeur numerique (ex. 17/34) | Haut gauche |
-| Reserve de bouffe | Compteur de bouffe restante (ex. 320) | Sous la barre de vie |
+| Reserve de nourriture | Compteur de nourriture restante (ex. 320) | Sous la barre de vie |
 | Monnaie | Compteur de monnaie (ex. 64) | Sous la barre de vie |
 | Objets lancables | Nombre de hachettes disponibles pour l'attaque a distance (ex. 5) | Sous la barre de vie |
 | Inventaire | Emplacements d'items utilisables (jusqu'a 5 affiches) | Haut droite, en ligne |
@@ -388,6 +394,21 @@ Chaque verbe qui fait avancer le temps de jeu declenche un **tour** (voir chapit
 | Utiliser un item | Appui sur l'emplacement d'item dans le HUD |
 | Menu pause | [A DEFINIR] |
 
+### 6.6 Regles de l'attaque a distance
+
+L'attaque a distance (hachette) utilise une **visee automatique** : le joueur ne choisit pas sa cible.
+
+| Regle | Detail |
+|---|---|
+| Condition de tir | Au moins un monstre **aligne** sur l'une des 4 directions cardinales |
+| Portee | Les cases affichees a l'ecran avec ligne de visee **non interrompue** |
+| Case adjacente | Impossible de lancer une hachette sur un monstre en case adjacente (c'est du corps a corps) |
+| Cible multiple | Le monstre **le plus proche** est vise |
+| Egalite de distance | Meme cible qu'au coup precedent si elle fait partie des candidats |
+| Egalite sans coup precedent | Le monstre ayant **le moins de PV** parmi les plus proches [A CONFIRMER : si egalite de PV aussi] |
+| Aucune cible valide | L'action est refusee : aucun tour consomme, aucune hachette perdue |
+| Stock vide | L'action est refusee : aucun tour consomme |
+
 ## 7. Le personnage
 
 ### 7.1 Futhark
@@ -400,15 +421,16 @@ Le personnage n'a **pas de progression permanente** : tout est remis a zero a ch
 
 | Element | Role | Valeur de depart |
 |---|---|---|
-| Points de vie (PV) | Vitalite : a 0, la run est perdue. Affiches sous la forme actuel/max (ex. 17/34) | [A DEFINIR] |
-| Nourriture | Ressource consommee a chaque tour. A 0, chaque tour coute 1 PV | [A DEFINIR] |
-| Monnaie | Sert a acheter des items aupres des marchands | 0 |
-| Hachettes | Munitions de l'attaque a distance | [A DEFINIR] |
+| Points de vie (PV) | Vitalite : a 0, la run est perdue. Affiches sous la forme actuel/max (ex. 17/34) | 17*|
+| Nourriture | Ressource consommee a chaque tour. A 0, chaque tour coute 1 PV | 150* |
+| Monnaie | Sert a acheter des items aupres des marchands | 0* |
+| Hachettes | Munitions de l'attaque a distance | 3* |
 | Degats | Degats infliges par les attaques, modifies par l'arme et les bijoux | [A DEFINIR] |
-| Reduction de degats | Degats recus, modifies par l'armure | [A DEFINIR] |
+| Reduction de degats | Degats recus, modifies par l'armure | 0* |
 | Dexterite (Dex) | Aptitude au touche et aux esquives | [A DEFINIR] |
 
-Les PV maximum peuvent etre augmentes par certains items (voir chapitre 8). Le PV de depart, la nourriture de depart et les formules de degats sont a calibrer lors de l'integration.
+Les PV maximum peuvent etre augmentes par certains items (voir chapitre 8).
+*Valeurs provisoires a qualibrer lors de l'equilibrage .
 
 ### 7.3 Capacites
 
@@ -418,7 +440,7 @@ Le personnage dispose d'emblee de trois capacites de base. Il n'en acquiert pas 
 |---|---|---|
 | Se deplacer | Deplacement d'une case sur la grille | Oui |
 | Attaque au corps a corps | Obtenue en se deplacant vers un ennemi. Degats selon l'arme equipee (et les bijoux) | Oui |
-| Attaque a distance | Lance une hachette. Limitee par le stock de hachettes | Oui |
+| Attaque a distance | Lance une hachette sur une cible choisie automatiquement (voir 6.6). Limitee par le stock de hachettes | Oui |
 
 Capacites additionnelles possibles, issues des items :
 
@@ -534,7 +556,7 @@ Les valeurs de statistiques (PV, degats, vitesse) sont [A DEFINIR] et seront cal
 
 Chaque biome possede un **set de monstres endemiques**, propre au royaume et coherent avec son ambiance et la mythologie nordique. D'autres monstres sont plus generaux et peuvent apparaitre dans n'importe quel biome.
 
-Le nombre de monstres par type et par biome, ainsi que leur description detaillee, seront ajoutes dans une version ulterieure de ce document. Chaque monstre devra y etre decrit avec : nom, biome, comportement, statistiques, drop, moyen d'en venir a bout.
+Le nombre de monstres par type et par biome, ainsi que leur description detaillee, seront ajoutes dans une version ulterieure de ce document. Chaque monstre devra y etre decrit avec : nom, biome, comportement, statistiques (PV, degats, distance d'aggro, propension au pas aleatoire pendant la poursuite, points de score), drop, moyen d'en venir a bout.
 
 ### 9.4 Score et recompenses
 
@@ -635,7 +657,7 @@ Principes a respecter par l'algorithme :
 1. **Aleatoire** : la disposition, les tailles de pieces, le contenu et la position de la sortie changent a chaque run.
 2. **Jouable** : chaque etage doit etre completable (entree reliee a la sortie par un chemin praticable).
 3. **Lisible** : la grille doit rester simple a lire dans la vue 2D du dessus (voir chapitre 5).
-4. **Reproductible** : une graine (seed) permet de regenerer le meme etage [A Confirmer].
+4. **Reproductible** : une graine (seed) permet de regenerer le meme etage.
 
 ### 10.5 Etage de boss
 
@@ -662,9 +684,7 @@ Les **mecaniques de biome** (regles specifiques a chaque royaume, par exemple le
 ### 10.7 Elements a trancher
 
 - Ordre de passage des biomes : [A DEFINIR] (voir chapitre 2).
-- Nombre d'etages par biome et nombre total d'etages d'une run : [A DEFINIR].
 - Taille de la grille d'un etage (nombre de cases total) : [A DEFINIR].
-- Visibilite : le joueur voit-il tout l'etage, ou une partie seulement (brouillard, vision limitee) ? [A DEFINIR]
 
 ## 11. Direction artistique et audio
 
@@ -677,10 +697,10 @@ L'identite visuelle de Futhark's Adventure s'inspire de la culture nordique : ma
 | Element | Choix |
 |---|---|
 | Rendu | **Pixel art** |
-| Perspective | **2D, vue du dessus**, sur grille (type minimap) |
+| Perspective | **2D, vue du dessus**, sur grille |
 | Univers visuel | [A DEFINIR] |
 | Texture / materiaux | Aspect brut |
-| Resolution de reference des sprites | [A DEFINIR] (taille de tuile, ex. 16 x 16 ou 32 x 32) |
+| Resolution de reference des sprites | **16 x 16 px** par defaut, a ajuster selon les assets trouves [A Confirmer] |
 | Palette | [A DEFINIR] : une palette generale, declinee par biome |
 | Animations | [A DEFINIR] : deplacement, attaque, degats, mort |
 
@@ -754,7 +774,7 @@ Le MVP est la version minimale qui doit imperativement etre livree.
 
 | Domaine | Contenu du MVP |
 |---|---|
-| Generation | Plusieurs etages successifs generes procedurellement (pieces et couloirs, chapitre 10), le dernier etant un etage de boss |
+| Generation | 3 a 5 etages normaux (parametrable) generes procedurellement (pieces et couloirs, chapitre 10), + 1 dernier etage avec le boss |
 | Personnage joueur (PJ) | Deplacement, attaque au corps a corps, attaque a distance (hachettes), utilisation d'une potion |
 | Tour par tour | Systeme de tours complet : le joueur agit, puis les monstres et le boss agissent (chapitre 3) |
 | Ressources | Nourriture consommee a chaque tour, PV, hachettes, famine (a 0 de nourriture, 1 PV par tour) |
@@ -764,7 +784,7 @@ Le MVP est la version minimale qui doit imperativement etre livree.
 | HUD | Barre de vie, nourriture, hachettes, inventaire, score (chapitre 5) |
 | Ecran de demarrage | Ecran de lancement d'une run |
 | Fin de run | Ecran de victoire / defaite avec score (chapitre 4) |
-| Leaderboard | Enregistrement et affichage des scores [A DEFINIR : local ou en ligne] |
+| Leaderboard | Enregistrement et affichage des scores |
 
 Le MVP **ne contient pas** : monnaie, marchands, equipement, runes et sorts, Grandes potions de vie, familiers, autres biomes, Odin, artefacts.
 
