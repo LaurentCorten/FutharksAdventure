@@ -15,16 +15,16 @@ non bloquants pour le moment, a rouvrir quand ils deviennent necessaires.
 
 - [x] Creer le projet Unity 6 (template 2D URP)
 - [x] Initialiser Git + .gitignore Unity (+ Git LFS si assets lourds)
-- [ ] Installer packages : Input System, Tilemap, TextMeshPro, Cinemachine
-- [ ] Arborescence :
+- [x] Installer packages : Input System, Tilemap, TextMeshPro, Cinemachine
+- [x] Arborescence :
       Assets/_Project/{Scripts, ScriptableObjects, Prefabs, Scenes, Art, Audio, UI}
-- [ ] Assembly Definitions pour separer les couches :
+- [x] Assembly Definitions pour separer les couches :
       - Futhark.Core (C# pur, zero UnityEngine) : regles du jeu, grille, tours
       - Futhark.Game (Unity) : MonoBehaviours, vues, prefabs
       - Futhark.Tests (EditMode)
 - [ ] Scenes : Bootstrap, MainMenu, Game
 - [ ] Convention de nommage + 1 page de regles d'architecture (voir annexe SOLID)
-- [ ] (T) Le projet compile, les tests EditMode se lancent (un test vide vert)
+- [x] (T) Le projet compile, les tests EditMode se lancent (un test vide vert)
 
 ---
 
@@ -33,7 +33,7 @@ non bloquants pour le moment, a rouvrir quand ils deviennent necessaires.
 Objectif : un carre qui se deplace sur une grille, un tour a la fois.
 
 ### 2.1 Modele de grille (Core, C# pur)
-- [ ] struct GridPosition (x, y) + operateurs
+- [x] struct GridPosition (x, y) + operateurs
 - [ ] enum TileType (Floor, Wall, Exit...)
 - [ ] class Grid : taille, acces aux cases, IsWalkable, IsInside
 - [ ] Interface IOccupant (entite posee sur une case) et registre des occupants par case

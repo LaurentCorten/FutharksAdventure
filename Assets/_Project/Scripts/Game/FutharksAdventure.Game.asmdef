@@ -1,0 +1,16 @@
+{
+    "name": "FutharksAdventure.Game",
+    "rootNamespace": "FutharksAdventure.Game",
+    "references": [
+        "GUID:516f74fe039695a4184bdba1dfa78cec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
