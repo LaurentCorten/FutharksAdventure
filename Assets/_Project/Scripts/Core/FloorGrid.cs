@@ -7,33 +7,10 @@ namespace FutharksAdventure.Core
     public class FloorGrid
     {
 
-        private TileType[,] _tiles;
-        private int _width;
-        private int _height;
+        private readonly TileType[,] _tiles;
 
-        public int Width
-        { 
-            get
-            {
-                return _width;
-            }
-            private set
-            {
-                _width = value;
-            }
-        }
-
-        public int Height
-        { 
-            get
-            {
-                return _height;
-            }
-            private set
-            {
-                _height = value;
-            }
-        }
+        public int Width { get; }
+        public int Height { get; }
 
         public FloorGrid (int width, int height)
         {
@@ -56,35 +33,23 @@ namespace FutharksAdventure.Core
             return _tiles[pos.X, pos.Y];
         }
 
-        public TileType SetTileType(GridPosition pos, TileType type)
+        public void SetTileType(GridPosition pos, TileType type)
         {
             if (!IsInGrid(pos))
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(pos));
 
             _tiles[pos.X, pos.Y] = type;
-            return GetTileType(pos);
         }
 
         public bool IsWalkable(GridPosition pos)
         {
-
-            if (!IsInGrid(pos))
-                return false;
-            
-            bool isWalkable = false;
-            switch (GetTileType(pos))
+            return GetTileType(pos) switch
             {
-                case TileType.Floor:
-                case TileType.Exit:
-                case TileType.Entry:
-                    isWalkable = true;
-                    break;
-
-                //default:
-                //    isWalkable = false;
-            }
-
-            return isWalkable;
+                TileType.Floor => true,
+                TileType.Exit => true,
+                TileType.Entry => true,
+                _ => false
+            };
         }
     }
 }

@@ -121,13 +121,13 @@ Royaume des humains, entoure d'un ocean infini. Boss : **Jormungandr** (le serpe
 Monde primordial de glace, de froid extreme et de brumes. Y figurent les rivieres Elivagar, la source Hvergelmir, l'obscurite et le froid. Ambiance de force primordiale, de purete et de danger, "epreuves" et "metamorphoses". Boss : **Nidhogg** (dragon). Artefact : [A DEFINIR].
 
 **Jotunheim**
-Royaume des "geants", sauvage et rocheux, fait de forets et de montagnes. Boss : [A DEFINIR]. Artefact : [A DEFINIR].
+Royaume des "geants", sauvage et rocheux, fait de forets et de montagnes. Boss : **Thrym, Hrungnir, Utgarda-Loki, Thjazi**. Artefact : [A DEFINIR].
 
 **Helheim**
 Royaume souterrain des morts de causes naturelles ou de vieillesse. Boss : **Hel** (deesse). Artefact : [A DEFINIR].
 
 **Svartalfheim (Nidavellir / Myrkheim)** [TODO: A approfondir]
-Royaume souterrain des Nains et des elfes noirs. Ambiance artisanale et obscure, tournee vers la forge, la magie et les armes puissantes [A VERIFIER : fin de la description coupee dans les notes]. Boss : **Alberich** (roi sorcier). Artefacts associes : **Mjolnir** et **Brisingamen**.
+Royaume souterrain des Nains et des elfes noirs. Ambiance artisanale et obscure, tournee vers la forge, la magie et les armes puissantes [A VERIFIER : fin de la description coupee dans les notes]. Boss : **Andvari** (roi sorcier). Artefacts associes : **Mjolnir** et **Brisingamen**.
 
 ### Mythes et artefacts
 
@@ -215,7 +215,7 @@ Le score mesure la performance d'une run et determine le classement au leaderboa
 
 La valeur brute du loot croit avec sa taille (petit < moyen < gros). Les formules et la ponderation entre ces trois sources sont [A DEFINIR].
 
-Le leaderboard est enregistrer en **local** (fichier JSON) et comprends le **Top 10** des meilleurs scores.
+Le leaderboard est enregistre en **local** (fichier JSON) et comprends le **Top 10** des meilleurs scores.
 
 ## 4. Conditions de victoire / defaite
 
@@ -451,6 +451,12 @@ Capacites additionnelles possibles, issues des items :
 ### 7.4 Inventaire et equipement
 
 L'inventaire contient **3 emplacements de base**, auxquels s'ajoutent eventuellement des emplacements supplementaires donnes par l'equipement (la ceinture en ajoute 2). Chaque item est soit **actif** (utilise puis consomme ou active), soit **passif** (effet permanent tant qu'il est possede).
+
+L'inventaire fonctionne comme une file, rempli de **droite a gauche**, sans jamais laisser de case vide entre deux items :
+
+- **Ramassage** : marcher sur un item le ramasse automatiquement. Il est place dans la case libre la plus a droite.
+- **Inventaire plein** : l'item le plus a droite (le plus ancien) est depose au sol sur la case du joueur, tous les autres items se decalent d'une case vers la droite, et le nouvel item prend la case la plus a gauche.
+- **Utilisation** : quand un item est consomme, les items situes a sa gauche se decalent d'une case vers la droite pour combler le vide.
 
 En sus, trois emplacements caches existent pour l'equipement :
 

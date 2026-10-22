@@ -1,247 +1,228 @@
-# FUTHARK'S ADVENTURE - Roadmap Vertical Slice
+# FUTHARK'S ADVENTURE - Roadmap Vertical Slice (v2)
 
-Base : GDD octobre 2026 (chapitre 12, MVP palier 0).
-Legende : [ ] a faire | [x] fait | (D) decision a prendre | (T) test de validation
+Base : GDD octobre 2026 (chapitre 12).
+Echeance : slice fonctionnelle le 01/12/2026, produit fini le 15/12/2026.
+Budget : ~10-15 h/semaine jusqu'au 22/11, ~30 h/semaine du 23/11 au 15/12.
 
-Regle d'or : chaque phase doit produire quelque chose de JOUABLE avant de passer a la suivante.
-Ne jamais commencer une phase tant que la precedente n'est pas validee par ses tests (T).
+Legende :
+[ ] a faire | [x] fait
+(T) test unitaire EditMode | (V) verification visuelle en Play mode | (D) decision a prendre
+(+) "si le temps le permet" : hors noyau garanti, reporte sans regret
 
-Points non tranches du GDD (royaume du 1er biome, comportement des monstres hors detection, etc.) :
-non bloquants pour le moment, a rouvrir quand ils deviennent necessaires.
+## Regles de travail
 
----
-
-## Phase 1 - Setup du projet
-
-- [x] Creer le projet Unity 6 (template 2D URP)
-- [x] Initialiser Git + .gitignore Unity (+ Git LFS si assets lourds)
-- [x] Installer packages : Input System, Tilemap, TextMeshPro, Cinemachine
-- [x] Arborescence :
-      Assets/_Project/{Scripts, ScriptableObjects, Prefabs, Scenes, Art, Audio, UI}
-- [x] Assembly Definitions pour separer les couches :
-      - Futhark.Core (C# pur, zero UnityEngine) : regles du jeu, grille, tours
-      - Futhark.Game (Unity) : MonoBehaviours, vues, prefabs
-      - Futhark.Tests (EditMode)
-- [ ] Scenes : Bootstrap, MainMenu, Game
-- [ ] Convention de nommage + 1 page de regles d'architecture (voir annexe SOLID)
-- [x] (T) Le projet compile, les tests EditMode se lancent (un test vide vert)
+- Chaque phase produit quelque chose de JOUABLE avant de passer a la suivante.
+- Pas d'anticipation : une interface n'est creee que quand un besoin reel apparait
+  (deux implementations, ou un faux necessaire pour un test). Chaque decision est
+  expliquee et validee avant d'etre codee.
+- Regles du jeu en C# pur (Core) testees ; MonoBehaviours = colle fine ; donnees dans des ScriptableObjects.
+- Communication logique -> affichage par evenements (pas de dependance directe).
+- Point d'entree unique : scene Bootstrap + Composition Root (seul endroit qui fait les new).
+- Les [A DEFINIR] du GDD sont tranches au moment ou ils deviennent necessaires, ou au playtest.
+- Checkpoint : si J2 n'est pas atteint le 15/11, on revoit le perimetre.
 
 ---
 
-## Phase 2 - Fondations : grille et tour par tour
+## Planning
 
-Objectif : un carre qui se deplace sur une grille, un tour a la fois.
+| Semaine | Dates | Heures | Phases visees | Jalon |
+|---|---|---|---|---|
+| S1 | 22/10 - 01/11 | ~12 h | Phase 2 | J1 |
+| S2 | 02/11 - 08/11 | ~12 h | Phase 3 | |
+| S3 | 09/11 - 15/11 | ~12 h | Phase 4 | J2 |
+| S4 | 16/11 - 22/11 | ~12 h | Phases 5-6 | J3 |
+| S5 | 23/11 - 01/12 | ~40 h | Phases 7-8-9 + debut 10 | J4 = SLICE |
+| S6 | 02/12 - 08/12 | ~30 h | Phase 10 + playtests | J5 |
+| S7 | 09/12 - 15/12 | ~30 h | Phase 11 + paliers si temps | J6 = FINI |
 
-### 2.1 Modele de grille (Core, C# pur)
-- [x] struct GridPosition (x, y) + operateurs
-- [ ] enum TileType (Floor, Wall, Exit...)
-- [ ] class Grid : taille, acces aux cases, IsWalkable, IsInside
-- [ ] Interface IOccupant (entite posee sur une case) et registre des occupants par case
-- [ ] (T) Tests unitaires : IsWalkable, limites, case occupee
+Tache de fond des S1 (peu d'heures) : chercher et choisir le pack d'assets externe
+(il fixe la taille de tuile et la DA, mieux vaut le savoir tot).
+
+---
+
+## Phase 1 - Setup du projet [quasi termine]
+
+- [x] Projet Unity 6, Git, packages, arborescence, Assembly Definitions FutharksAdventure.{Core, Game, Tests}
+- [x] (T) Les tests EditMode se lancent
+- [ ] Scene Bootstrap + script Bootstrap (Composition Root minimal) -> fait en Phase 2.4
+
+---
+
+## Phase 2 - Grille, affichage et tour par tour (S1) -> J1
+
+Objectif : un carre qui se deplace sur une grille, un tour a la fois, camera qui le suit.
+
+### 2.1 Modele de grille (Core) [termine]
+- [x] GridPosition, TileType, FloorGrid
+- [x] (T) Tests verts
 
 ### 2.2 Vue de grille (Game)
-- [ ] GridView : dessine la Grid dans un Tilemap (placeholders carres de couleur)
-- [ ] Conversion GridPosition <-> position monde
-- [ ] ViewportConfig (ScriptableObject) : nombre de colonnes et de lignes affichees, **valeurs impaires** pour que le joueur soit exactement au centre
-- [ ] GridView affiche uniquement la fenetre de cases autour du joueur (le joueur reste toujours au centre)
-- [ ] Camera centree sur le joueur, avec Pixel Perfect Camera (resolution de reference = colonnes x lignes x taille de tuile)
-- [ ] Comportement aux bords de l'etage : choisir une case de remplissage pour les cases hors grille (mur ou vide) [a regarder au premier test]
-- [ ] Interface IVisibleArea (Core) : "cette case est-elle affichee a l'ecran ?" ; sert a la portee des hachettes
-- [ ] Interface IVisibilityRule (Core) avec une seule implementation pour l'instant : AllDisplayedCellsVisible  (permet d'ajouter plus tard un brouillard a portee fixe ou en ligne de vue sans toucher au reste)
-- [ ] Taille de tuile : parametre unique (16 px par defaut, a confirmer selon les assets) ; regler le Pixels Per Unit des sprites en consequence
-- [ ] (T) Test visuel : le joueur reste centre en traversant l'etage, y compris pres des bords
+- [ ] GridView : dessine TOUTE la FloorGrid dans un Tilemap (placeholders carres de couleur)
+- [ ] Etage de test code en dur (en attendant la generation procedurale de la Phase 5)
+- [ ] Convention : 1 case = 1 unite Unity (conversion GridPosition <-> monde triviale)
+- [ ] Camera fixe cadrant l'etage de test (le suivi du joueur arrive en 2.4)
+- [ ] Hors grille : fond uni (case Empty)
+- [ ] (V) L'etage s'affiche, la camera reste centree sur le joueur, y compris pres des bords
 
 ### 2.3 Systeme de tours (Core)
-- [ ] Interface IActor : TakeTurn()
-- [ ] TurnManager : le joueur agit -> chaque ennemi agit -> cout du tour -> attente
-- [ ] Interface IAction (Command pattern) : CanExecute() / Execute() / ConsumesTurn
-- [ ] Actions : MoveAction, WaitAction (interne), plus tard AttackAction, ThrowAction, UseItemAction
-- [ ] Evenements (C# events ou petit EventBus) : TurnStarted, TurnEnded, ActorMoved...
-- [ ] (T) Tests : une action valide avance d'un tour ; une action invalide ne consomme rien ; Les ennemis agissent dans l'ordre de leur liste (sequentiel), mais le joueur ne voit qu'un seul tour global ; animations jouees ensemble apres la resolution.
+- [ ] (D) Seance de conception : tours, actions, deplacement, occupation des cases (avant tout code)
+- [ ] Implementation selon les decisions prises
+- [ ] (T) Tests definis a l'issue de la seance de conception
 
-### 2.4 Input
+### 2.4 Input, affichage des entites, camera, Bootstrap
 - [ ] Input Actions asset : Move, RangedAttack, UseItem, Pause, Confirm, Cancel
-- [ ] Interface IPlayerInput + implementation clavier (fleches / ZQSD / WASD / pave num)
-- [ ] La logique ne connait JAMAIS une touche, seulement une action abstraite
-- [ ] (T) Le carre se deplace case par case, bloque par les murs, 1 deplacement = 1 tour
+- [ ] Lecture de l'input (clavier : fleches / ZQSD / WASD / pave num) ; la logique ne connait que des actions abstraites
+- [ ] EntityView : composant generique d'affichage d'une entite (joueur pour l'instant), deplacement instantane
+- [ ] Camera qui suit le joueur ; Orthographic Size dans une config (fixe en jeu, ajustable aux playtests)
+- [ ] Bootstrap : cree la grille, le joueur, l'input, le TurnManager, les vues, et les relie
+- [ ] (V) Le carre se deplace case par case, bloque par les murs, la camera le suit
 
 ---
 
-## Phase 3 - Le joueur
+## Phase 3 - Le joueur (S2)
 
 ### 3.1 Stats et ressources
-- [ ] PlayerStats (PV, PV max, nourriture, hachettes) en classe C# pure
-- [ ] Valeurs de depart dans un PlayerStatsConfig (ScriptableObject) : PV 17, nourriture 150, hachettes 3 (provisoires)
-- [ ] Systeme de cout de tour : -1 nourriture par tour
-- [ ] Famine : nourriture a 0 -> -1 PV par tour
-- [ ] Mort : evenement PlayerDied
-- [ ] (T) Tests : consommation, famine, mort par famine sans ennemi
+- [ ] PlayerStats (Core) : PV, PV max, nourriture, hachettes, VisionRange
+- [ ] Config de depart (SO) : PV 17, nourriture 150, hachettes 3, VisionRange (D valeur)
+- [ ] Cout du tour : -1 nourriture ; a 0 : -1 PV par tour
+- [ ] Evenement PlayerDied
+- [ ] (T) Consommation, famine, mort par famine sans ennemi
 
 ### 3.2 Combat
-- [ ] Interface IDamageable (TakeDamage, IsDead) et composant Health
-- [ ] Attaque melee : se deplacer vers une case occupee par un ennemi => AttackAction
-- [ ] Formule de degats simple et isolee (IDamageCalculator) : degats fixes pour la slice
-- [ ] Attaque a distance : ThrowAction, decremente les hachettes, projectile instantane sur la ligne
-- [ ] Attaque a distance : ThrowAction, decremente les hachettes, cible choisie par un ITargetSelector (visee automatique)
-- [ ] Implementation AutoTargetSelector (classe dediee, testable en C# pur), regles du GDD 6.6 :
-  - candidats : monstres alignes sur l'un des 4 axes, dans la zone affichee (IVisibleArea), ligne de visee non interrompue
-  - exclusion : monstre en case adjacente
-  - choix : le plus proche ; a egalite, la cible du coup precedent si elle est candidate ; sinon le moins de PV
-  - [a confirmer dans le GDD] egalite de PV aussi : choix temporaire = premier de la liste
-- [ ] LastTargetMemory : memorise la derniere cible ; une cible morte n'est simplement plus candidate
+- [ ] Sante (TakeDamage, IsDead) partagee joueur / ennemis
+- [ ] Attaque melee : MoveAction vers une case ennemie => AttackAction
+- [ ] Degats fixes, toujours touche (le test de touche est un ajout de palier)
+- [ ] ThrowAction + selection automatique de cible (regles GDD 6.6) :
+      alignement 4 axes, portee = VisionRange (carre), ligne de visee non bloquee par un mur,
+      pas de case adjacente, plus proche, egalite -> cible precedente, sinon moins de PV
+      (D) egalite de PV aussi : premier de la liste en attendant
 - [ ] Aucune cible ou stock vide : action refusee, aucun tour, aucune hachette perdue
-- [ ] (T) Tests : melee tue un ennemi, un test par ligne du tableau 6.6 (alignement, adjacence, mur qui bloque, plus proche, egalite avec memoire, egalite sans memoire, aucune cible, stock vide)
+- [ ] (T) Un test par regle du tableau 6.6
 
-### 3.3 Potion de vie
-- [ ] Interface IUsable (Use(user)) ; PotionDeVie : rend une quantite moyenne de PV (plafonnee au max)
-- [ ] Inventaire minimal : 3 emplacements, ajout/retrait, utilisation
-- [ ] (T) Tests : inventaire plein refuse l'ajout, potion plafonne aux PV max
+### 3.3 Potion et inventaire (logique seule)
+- [ ] Inventaire en file : 3 emplacements, rempli de droite a gauche, sans trou
+- [ ] Ajout : case libre la plus a droite ; plein : ejection de l'item le plus a droite, decalage, ajout a gauche
+- [ ] Utilisation : consommation puis decalage vers la droite des items a gauche
+- [ ] Potion de vie : soin moyen plafonne aux PV max
+- [ ] (T) Ajout, ejection quand plein (l'item ejecte est renvoye), decalage apres utilisation, potion plafonnee
 
----
-
-## Phase 4 - Ennemis
-
-Objectif : des monstres qui bougent, poursuivent et attaquent.
-
-- [ ] Pathfinding BFS sur la grille (4 directions) en Core [A DISCUTER]
-- [ ] Interface IEnemyBrain (DecideAction) : une strategie par comportement
-- [ ] Comportements de base :
-      - Chaser : detecte puis poursuit le joueur
-      - Wanderer : errance, poursuit si detecte
-      - Ranged : tire a distance dans l'alignement (si temps)
-- [ ] Donnees : EnemyData (ScriptableObject) : nom, PV, degats, rayon de detection, chance d'arreter de poursuivre, brain, score, table de drop
-- [ ] Creer 3 types de monstres aux stats distinctes (ex. rapide fragile / lent costaud / a distance)
-- [ ] Regle 1 action par tour : deplacement OU attaque
-- [ ] Gestion des conflits : deux ennemis visent la meme case, le premier de la liste gagne
-- [ ] Mort d'un ennemi : retire de la grille, score, drop eventuel
-- [ ] (T) Un ennemi detecte, poursuit, attaque et meurt ; aucun ennemi ne traverse un mur ni un autre ennemi
+### Fin de S2
+- [ ] Choisir et acheter / telecharger le pack d'assets (au plus tard le 08/11) : fixe la taille de tuile
 
 ---
 
-## Phase 5 - Generation procedurale d'un etage
+## Phase 4 - Ennemis (S3) -> J2
 
-Objectif : un etage jouable, different a chaque run. A faire en C# pur pour tout tester sans Unity.
-
-- [ ] Generer 9 pieces en matrice 3x3, chaque piece 1 a 7 cases de cote, placees dans sa cellule
-- [ ] Creer les couloirs (1 case de large, au milieu de chaque cote) entre pieces voisines (12 connexions)
-- [ ] Fusion possible de 2 pieces voisines (regle a simple : probabilite parametrable)
-- [ ] Validation : BFS entree -> sortie, regenerer si echec
-- [ ] Choix aleatoire de la piece d'entree, puis sortie dans une autre piece (distance minimale parametrable)
-- [ ] Placement du contenu : monstres, loot (selon regles de densite dans un LevelConfig SO)
-- [ ] Seed : Une seed par run ; la seed de chaque etage est derivee de (seed de run, numero d'etage) => meme seed = meme deroulement (IRandomProvider injectable)
-- [ ] Structure : FloorGenerator = orchestrateur ; RoomGenerator, CorridorGenerator, ContentPlacer = classes separees
-- [ ] Outil de debug : afficher l'etage en ASCII dans la console / fenetre editeur
-- [ ] (T) Tests : 1000 seeds, 100% des etages completables, aucune piece isolee, sortie != entree
+- [ ] (D) Algorithme de deplacement vers le joueur (a discuter : BFS ou plus simple)
+- [ ] Cerveau d'ennemi (strategie par comportement) : Chaser, Wanderer ; Ranged (+)
+- [ ] EnemyData (SO) : nom, PV, degats, detectionDistance, randomStepChance, score, drop
+- [ ] 2 types de monstres garantis aux stats distinctes ; 3e type (+)
+- [ ] 1 action par tour : deplacement OU attaque ; conflit de case : premier de la liste gagne
+- [ ] Mort : retire de la grille, evenement (score plus tard)
+- [ ] EntityView reutilisee pour les ennemis (apparition, deplacement, disparition)
+- [ ] (T) Detection, poursuite, attaque, mort ; aucun ennemi ne traverse un mur ou un autre ennemi
+- [ ] (V) Combat jouable a l'ecran, famine fonctionnelle
 
 ---
 
-## Phase 6 - Loot et items
+## Phase 5 - Generation procedurale et brouillard (S4)
 
-- [ ] ItemData (ScriptableObject) : nom, icone, actif/passif, occupe une place, consommable
+### 5.1 Generation (Core)
+- [ ] (D) Taille de l'etage et des pieces (idee : 21x21, pieces 5x5 max, 1 case de mur autour)
+- [ ] 9 pieces en 3x3, couloirs entre voisines, fusion possible (probabilite parametrable)
+- [ ] Entree et sortie dans deux pieces differentes
+- [ ] Placement des monstres selon une config de densite
+- [ ] Seed de run ; seed d'etage derivee de (seed de run, numero d'etage)
+- [ ] Affichage ASCII de debug
+- [ ] (T) 1000 seeds : 100 % des etages completables, sortie != entree
+
+### 5.2 Brouillard
+- [ ] Etat par case (Core) : jamais vue / deja vue / visible
+- [ ] Mise a jour a chaque tour : zone carree de rayon VisionRange autour du joueur (murs ignores)
+- [ ] Affichage : noir si jamais vue, assombri si deja vue, normal si visible ; ennemis caches hors vue
+- [ ] (T) Etats corrects apres deplacements ; (V) rendu a l'ecran
+
+---
+
+## Phase 6 - Items au sol et ramassage (S4) -> J3
+- [ ] Donnees d'item (SO) : nom, icone, actif/passif, occupe une place, consommable
+- [ ] (D) Affichage des items au sol : EntityView ou affichage dedie
 - [ ] Loot au sol : nourriture (petite/moyenne/grosse), hachettes (3/5), potion de vie
-- [ ] Ramassage automatique en marchant sur la case (sans cout de tour supplementaire)
-- [ ] Table de loot simple par etage (LootTable SO)
-- [ ] Drops de monstres (optionnel, selon tables)
-- [ ] (T) Ramasser nourriture/hachettes met a jour le HUD ; inventaire plein laisse l'item au sol
+- [ ] Ramassage automatique en marchant dessus ; item ejecte depose sur la case du joueur
+- [ ] Placement du loot a la generation (config de densite)
+- [ ] Drops de monstres (+)
+- [ ] (T) Ramassage, ressources mises a jour, item ejecte present au sol
 
 ---
 
-## Phase 7 - Progression : etages, boss, fin de run
+## Phase 7 - Progression et boss (S5)
 
-- [ ] RunManager : seed de run, etage courant, etat de run (en cours / victoire / defaite)
-- [ ] Prise de la sortie : generation de l'etage suivant, joueur place a l'entree
-- [ ] Conservation des stats du joueur d'un etage a l'autre
-- [ ] Courbe de difficulte simple par etage (plus de monstres / stats multipliees via config)
-- [ ] Etage de boss : arene simple (une grande piece) ; le boss garde la sortie
-- [ ] Boss : EnemyData dedie + 2 ou 3 patterns (ex. charge, attaque de zone, invocation de petits monstres) en strategies IEnemyBrain
-- [ ] Victoire : boss mort -> fin de run victoire
-- [ ] Defaite : PV a 0 -> fin de run defaite
-- [ ] (T) Une run complete se joue du premier etage jusqu'a la victoire ou la mort
-
----
-
-## Phase 8 - Score et leaderboard
-
-- [ ] ScoreService : etage atteint + monstres tues (+ bonus de loot plus tard, palier 3)
-- [ ] Ponderation dans un ScoreConfig SO (modifiable sans recompiler)
-- [ ] Interface ILeaderboardRepository + implementation JsonLeaderboardRepository (fichier local, top 10)
-- [ ] Entree : saisie d'un nom (ou nom par defaut) a la fin de run
-- [ ] (T) Tests : tri correct, limite top 10, fichier absent ou corrompu ne plante pas
+- [ ] RunManager : seed, etage courant, etat (en cours / victoire / defaite)
+- [ ] Sortie : etage suivant genere, stats du joueur conservees
+- [ ] Nombre d'etages normaux parametrable (3 a 5) + etage de boss
+- [ ] Difficulte croissante simple via config
+- [ ] Etage de boss : une grande piece, le boss garde la sortie
+- [ ] Boss : 1 pattern garanti ; 2e et 3e patterns (+)
+- [ ] Victoire = boss mort ; defaite = PV a 0
+- [ ] (V) Une run complete se joue du premier etage a la victoire ou la mort
 
 ---
 
-## Phase 9 - Interface et flux de jeu
+## Phase 8 - Score et leaderboard (S5)
 
-### 9.1 HUD (vue etage)
-- [ ] Barre de vie (ex. 17/34), nourriture, hachettes, score, emplacements d'inventaire
-- [ ] Zones reservees (invisibles) pour monnaie, pour accueillir le palier 2 sans refonte
-- [ ] HUD abonne aux evenements (pattern Observer), jamais d'appel direct depuis la logique
-- [ ] Utilisation d'un item par clic sur l'emplacement, description au survol
+- [ ] Score : etage atteint + monstres tues ; ponderation dans une config (SO)
+- [ ] Leaderboard local JSON, top 10
+- [ ] Nom par defaut ; saisie du nom (+)
+- [ ] (T) Tri, limite top 10, fichier absent ou corrompu ne plante pas
 
-### 9.2 Ecrans
+---
+
+## Phase 9 - Interface et flux de jeu (S5) -> J4 = SLICE
+
+- [ ] State Machine : Bootstrap -> Menu -> Run -> FinDeRun -> Menu ; (D) pause = etat ou sous-etat
+- [ ] HUD abonne aux evenements : PV, nourriture, hachettes, inventaire, score ; zone reservee monnaie
+- [ ] Utilisation d'item par clic, description au survol
 - [ ] Menu principal : Nouvelle run, Leaderboard, Quitter
-- [ ] Menu pause (Echap) : reprendre, abandonner, quitter ; le temps de jeu ne progresse pas
-- [ ] Ecran de fin de run : resultat, cause, score detaille, position au leaderboard, rejouer / menu
-- [ ] Machine a etats de flux (GameStateMachine) : Menu -> Run -> FinDeRun -> Menu
-- [ ] (T) On enchaine plusieurs runs sans relancer le jeu, tout est remis a zero correctement
+- [ ] Menu pause : reprendre, abandonner, quitter
+- [ ] Ecran de fin : resultat, cause, score, position au leaderboard, rejouer / menu
+- [ ] (V) Plusieurs runs enchainees sans relancer le jeu, tout est remis a zero
 
 ---
 
-## Phase 10 - Manette (optionnel dans la slice, "clavier/souris ou/et manette")
+## Phase 10 - Assets, animations, audio (S5-S6) -> J5
 
-- [ ] Ajouter le schema manette aux Input Actions (aucun changement dans la logique)
-- [ ] Navigation d'inventaire a la croix directionnelle
-- [ ] (T) Une run complete jouable a la manette
-
----
-
-## Phase 11 - Direction artistique et audio (minimum)
-
-- [ ] Tileset sol/murs du biome choisi (16x16), sprite joueur, 3 monstres, boss, sortie, loot
-- [ ] Icones HUD, cadres a bords casses (octogonaux), police viking (verifier la licence)
+- [ ] Integration du pack d'assets : tuiles, joueur, monstres, boss, sortie, loot, icones HUD
+- [ ] Taille de tuile et Pixels Per Unit regles selon le pack ; Pixel Perfect Camera
+- [ ] Animations de deplacement / attaque ; ennemis animes ensemble apres resolution du tour
+- [ ] Blocage de l'input pendant les animations
 - [ ] Retours visuels : degats, mort, ramassage
-- [ ] Sons minimum : pas, coup porte, coup recu, ramassage, mort, musique du biome
-- [ ] Decision : production interne ou assets externes (licences a verifier)
+- [ ] Sons minimum : pas, coup porte, coup recu, ramassage, mort, musique ; (+) ambiances
+- [ ] Police et cadres (verifier les licences)
+- [ ] (V) Le jeu est lisible : joueur, ennemis, loot, sortie identifiables d'un coup d'oeil
 
 ---
 
-## Phase 12 - Equilibrage, stabilite, build
+## Phase 11 - Playtests, equilibrage, build (S6-S7) -> J6 = FINI
 
-- [ ] Equilibrer via les ScriptableObjects : nourriture de depart (150), PV (17), hachettes (3), nombre d'etages normaux (3 a 5), densite de loot, stats monstres/boss, ViewportConfig (taille de la fenetre)
-- [ ] Objectif : la famine met la pression sans etre injuste, le boss est un vrai pic de difficulte
-- [ ] Jouer 20 runs completes et noter les points bloquants
-- [ ] Decider si on garde "tout affiche" ou si on active un brouillard (portee fixe ou ligne de vue)
-- [ ] Corriger les bugs bloquants, tester le build PC (pas seulement l'editeur)
-- [ ] Definir la configuration minimale PC
-- [ ] (T) Criteres de reussite du GDD 12.6 tous valides
-
----
-
-## Jalons suggeres
-
-| Jalon | Contenu | Ce qu'on voit |
-|---|---|---|
-| J1 | Phases 1-2 | Un carre qui se deplace au tour par tour |
-| J2 | Phases 3-4 | On se bat contre des monstres, la famine fonctionne |
-| J3 | Phases 5-6 | Etages aleatoires avec loot |
-| J4 | Phases 7-8 | Run complete jouable (moche mais complete) + leaderboard |
-| J5 | Phase 9 | Menus, HUD, flux complet |
-| J6 | Phases 11-12 | Art, son, equilibrage, build |
+- [ ] Build PC teste (pas seulement l'editeur)
+- [ ] Playtests : 20 runs completes, noter les points bloquants
+- [ ] Equilibrage via les SO : nourriture, PV, hachettes, VisionRange, densites, stats monstres/boss, nombre d'etages
+- [ ] Objectif : la famine met la pression sans etre injuste, le boss est un vrai pic
+- [ ] Corriger les bugs bloquants ; definir la configuration minimale
+- [ ] (V) Criteres du GDD 12.6 tous valides
 
 ---
 
-## Annexe - Garde-fous SOLID pour ce projet
+## Paliers apres la slice (GDD 12.4, seulement si temps restant en S7)
 
-- S : une classe = une responsabilite (TurnManager ne calcule pas les degats, le HUD ne modifie pas les stats)
-- O : nouveau comportement ennemi, nouvel item ou nouvelle action = nouvelle classe, sans modifier l'existant
-- L : tout IEnemyBrain / IUsable / IAction doit etre utilisable sans cas particulier chez l'appelant
-- I : petites interfaces (IDamageable, IUsable, IActor...) plutot qu'une grosse interface unique
-- D : la logique depend d'abstractions (IPlayerInput, ILeaderboardRepository, IRandomProvider), jamais de Unity ou d'un fichier concret
-- Donnees dans des ScriptableObjects, regles de jeu dans du C# pur testable, MonoBehaviours = colle fine entre les deux
-- Communication par evenements entre logique et UI
-- Eviter les singletons : injection manuelle via un point d'entree unique (Bootstrap / Composition Root)
+- Palier 1 : arme, armure, item nourriture -> PV, quelques runes, ceinture (+)
+- Palier 2 : monnaie, marchands
+- Palier 3 : lootables de score
+- Palier 4 : grandes potions, plus de sorts
+- Palier 5 : familiers
+- Palier a definir : test de touche (Dex), support manette
 
-## Annexe - Hors scope de la slice (a ne PAS coder maintenant)
+## Hors scope de la slice
 
-Monnaie, marchands, equipement (arme, armure, ceinture), bijoux, runes, grandes potions, item de transformation, familiers, artefacts, autres biomes, Odin, tactile, mecaniques de biome.
-(Prevoir seulement des points d'extension propres : interfaces, zones de HUD, tables de loot.)
+Monnaie, marchands, equipement, bijoux, runes, grandes potions, item de transformation,
+familiers, artefacts, autres biomes, Odin, tactile, manette, mecaniques de biome, test de touche.
