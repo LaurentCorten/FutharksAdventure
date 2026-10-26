@@ -10,13 +10,7 @@ Octobre 2026
 
 **Genre :** Roguelike - Tour par tour - Grid based
 
-**USP :** [TODO: trouver mieux !]
-
-*Un **roguelike** pur au tour par tour, ou chaque pas coute de la nourriture et chaque choix compte.*
-
-*Une descente a travers les **neuf royaumes** de la mythologie nordique, un biome et un boss par royaume.*
-
-*Une course au score : la vraie victoire est la premiere place du leaderboard.*
+**USP :** [TBA]
 
 ---
 
@@ -115,7 +109,7 @@ Ce tableau est la reference unique pour les royaumes, leurs boss et leurs artefa
 Notes :
 - Svartalfheim : [TODO: A approfondir quel nom, quelles differences ?]
 
-### 2.5 Mythes et artefacts
+### 2.5 Mythes et artefacts [WIP - TODO: approfondire le lore pour en tirer un arc narratif]
 
 **Ymir et la creation de Midgard.** Ymir est l'ancetre des geants, ne de la rencontre des glaces de Niflheim et des flammes de Muspelheim. Son corps a servi a creer Midgard (tue par Odin et ses adelphes). Sa chair est devenue la terre, son sang les mers, et ses sourcils une barriere protectrice. Cette barriere protege les humains des "geants" et explique la relation conflictuelle entre les deux peuples.
 
@@ -203,7 +197,7 @@ La mort n'est pas une fin narrative (voir 2.1). Le score d'une run interrompue e
 
 **Limites** :
 
-- Pas de sauvegarde en cours de run [A VERIFIER].
+- Pas de sauvegarde en cours de run [A Confirmer].
 - Pas de progression persistante entre les runs.
 - Pas de "mauvaise fin" ni de fin alternative : seuls comptent la mort ou la victoire sur Odin, et le score obtenu.
 
@@ -255,7 +249,7 @@ Le personnage n'a **pas de progression permanente** : tout est remis a zero a ch
 
 Les PV maximum peuvent etre augmentes par certains items (chapitre 5).
 
-**Combat** : a terme, chaque attaque passe par un test de touche (Dex) ; les degats ne sont appliques qu'en cas de touche, diminues par la reduction de degats (calcul [A DEFINIR]). Dans la vertical slice, le test de touche n'existe pas : les degats sont fixes et toute attaque touche (chapitre 10).
+**Combat** : Chaque attaque passe par un test de touche (Dex) ; les degats ne sont appliques qu'en cas de touche, diminues par la reduction de degats (calcul [A DEFINIR]).
 
 ### 4.3 Verbes
 
@@ -264,7 +258,7 @@ Les verbes sont les capacites du personnage. Il dispose d'emblee de toutes les c
 | Verbe | Description | Consomme un tour | Autre cout |
 |---|---|---|---|
 | Se deplacer | Deplacement d'une case sur la grille, dans l'une des 4 directions cardinales | Oui | - |
-| Attaquer au corps a corps | S'obtient en se deplacant vers une case occupee par un ennemi (pas de touche dediee). Degats selon l'arme et les bijoux | Oui | - |
+| Attaquer au corps a corps | S'obtient en se deplacant vers une case occupee par un ennemi | Oui | - |
 | Attaquer a distance | Lance une hachette sur une cible choisie automatiquement (voir 4.5) | Oui | 1 hachette |
 | Interagir (marchand, coffre, sortie) | Automatique en marchant sur la case | Non | - |
 | Acheter un item | Achete un item dans la bulle du marchand | Oui | Monnaie |
@@ -274,28 +268,23 @@ Les verbes sont les capacites du personnage. Il dispose d'emblee de toutes les c
 | Passer son tour (attendre) | [A DEFINIR : verbe non confirme] | Oui | - |
 
 Capacites additionnelles possibles, issues des items (chapitre 5) :
-
 - **Soins** : potions de vie.
 - **Conversion** : transformer de la nourriture en PV.
 - **Runes** : effets elementaires (feu, glace, tonnerre, chaos...) lies a la mythologie nordique [A DEFINIR].
 
 ### 4.4 Controles
 
-Le jeu est controle a l'aide du **nouvel Input System d'Unity**. Les verbes sont definis une seule fois sous forme d'actions abstraites, puis associes a chaque support. Aucune logique de jeu ne depend d'une touche precise.
-
-Supports vises : **clavier/souris** (vertical slice) ; **manette** et **tactile** decrits ici, implementes apres la vertical slice (chapitre 10).
-
 | Verbe | Clavier / souris | Manette | Tactile |
 |---|---|---|---|
 | Se deplacer | Fleches, ZQSD, WASD, ou pave numerique (8 haut, 2 bas, 4 gauche, 6 droite) | Stick gauche ou croix directionnelle | Croix directionnelle virtuelle a l'ecran |
 | Attaquer au corps a corps | Se deplacer vers l'ennemi | Se deplacer vers l'ennemi | Se deplacer vers l'ennemi |
-| Attaquer a distance | Barre d'espace, ou 5 du pave numerique | Bouton de face droit (B) [ou Y ou RT] | Bouton au centre de la croix virtuelle |
-| Utiliser un item | Clic gauche sur l'emplacement dans l'inventaire | Passer a la selection d'item avec le bouton de face gauche (X), naviguer a la croix directionnelle, confirmer | Appui court sur l'emplacement ; annule en glissant hors de l'item avant de lacher |
-| Voir la description d'un item | Survol de l'emplacement | Emplacement selectionne [A DEFINIR] | Appui long sur l'emplacement |
-| Confirmer / annuler | [A DEFINIR] | Bouton de face bas (A) / bouton de face droit (B) | [A DEFINIR] |
+| Attaquer a distance | Barre d'espace, ou 5 du pave numerique | Bouton de face droit (B) [ou Y ou RT?] | Bouton au centre de la croix virtuelle |
+| Utiliser un item | Clic gauche sur l'emplacement dans l'inventaire | Passer a la selection d'item avec le bouton de face gauche (X), naviguer a la croix directionnelle, confirmer | lache Appui sur l'emplacement  |
+| Voir la description d'un item | Survol de l'emplacement | Emplacement selectionne | Appui non lache sur l'emplacement |
+| Confirmer / annuler | NA./NA. | Bouton de face bas (A) / bouton de face droit (B) | NA. / glisser hors de l'item avant de lacher |
 | Menu pause | Echap | Bouton Start | Bouton menu a l'ecran [A DEFINIR] |
 
-La selection d'une proposition dans la bulle du marchand selon le support est [A DEFINIR].
+La selection d'une proposition dans la bulle du marchand fonctionne comme la selection dans l'inventaire.
 
 ### 4.5 Regles de l'attaque a distance
 
@@ -308,7 +297,7 @@ L'attaque a distance (hachette) utilise une **visee automatique** : le joueur ne
 | Case adjacente | Impossible de lancer une hachette sur un monstre en case adjacente (c'est du corps a corps) |
 | Cible multiple | Le monstre **le plus proche** est vise |
 | Egalite de distance | Meme cible qu'au coup precedent si elle fait partie des candidats |
-| Egalite sans coup precedent | Le monstre ayant **le moins de PV** parmi les plus proches [A CONFIRMER : si egalite de PV aussi] |
+| Egalite sans coup precedent | Le monstre ayant **le moins de PV** parmi les plus proches [A DEFINIR : si egalite de PV aussi] |
 | Aucune cible valide | L'action est refusee : aucun tour consomme, aucune hachette perdue |
 | Stock vide | L'action est refusee : aucun tour consomme |
 
@@ -318,7 +307,7 @@ L'attaque a distance (hachette) utilise une **visee automatique** : le joueur ne
 
 Tout ce que le joueur trouve ou achete est un **item** ou une **ressource**. Chaque item possede trois proprietes de conception :
 
-- **Actif / Passif** : un item *actif* est utilise volontairement par le joueur (puis consomme ou declenche) ; un item *passif* agit en permanence tant qu'il est equipe ou possede.
+- **Actif / Passif** : un item *actif* est utilise volontairement par le joueur ; un item *passif* agit en permanence tant qu'il est equipe ou possede.
 - **Occupe une place** : indique si l'item prend un emplacement de l'inventaire (oui / non).
 - **Consommable** : indique si l'item est consomme a l'utilisation ou reste utilisable.
 
@@ -358,7 +347,7 @@ Les ressources ne sont pas des items d'inventaire : elles sont stockees dans des
 |---|---|---|---|---|
 | Potion de vie | Rend une quantite moyenne de PV | Actif | Oui | Oui |
 | Grande potion de vie | Rend tous les PV et augmente un peu les PV maximum | Actif | Oui | Oui |
-| Item de transformation (nom [A DEFINIR])* | Transforme de la nourriture en PV (ratio 1 pour 1 envisage) | Actif | Oui | Non |
+| Item de transformation (nom [A DEFINIR])* | Transforme de la nourriture en PV (ratio 1 pour 1 [A Confirmer]) | Actif | Oui | Non |
 | Bijou de Dexterite | Augmente les chances de touche et d'esquive | Passif | Oui | Non |
 | Bijou de Force | Augmente les degats infliges | Passif | Oui | Non |
 | Dague | Arme de niveau 1, augmente un peu les degats infliges | Passif | Non | Non |
@@ -366,8 +355,8 @@ Les ressources ne sont pas des items d'inventaire : elles sont stockees dans des
 | Ceinture** | Rajoute 2 emplacements d'inventaire | Passif | Non | Non |
 | Runes | Items porteurs d'effets elementaires/magiques tels que feu, glace, tonnerre, chaos, peur... [A DEFINIR] | Actif | Oui | Oui |
 
-\*Peut-etre, en plus de la consommation de nourriture, appliquer une penalite (comme une lenteur digestive) en cas d'utilisation excessive d'un coup ?
-\*\*Sera peut-etre fusionnee avec la ceinture de force.
+*Peut-etre, en plus de la consommation de nourriture, appliquer une penalite (comme une lenteur digestive) en cas d'utilisation excessive d'un coup ?  
+**Sera peut-etre fusionnee avec la ceinture de force.
 
 ### 5.5 Runes
 
@@ -543,7 +532,7 @@ Menu principal -> Vue etage <-> Menu pause
 
 **Cadrage**
 
-Nombre fixe de lignes et de colonnes affichees, avec le joueur toujours au centre. Le canvas de jeu est limite par un cadre avec decorations [A DEFINIR]. [A Confirmer]
+Nombre fixe de lignes et de colonnes affichees, avec le joueur toujours au centre. Le canvas de jeu est limite par un cadre avec decorations [A DEFINIR] pour ramener a une forme carree. [A Confirmer]
 
 **Brouillard**
 
@@ -568,14 +557,14 @@ L'inventaire est affiche dans le HUD (8.4) ; ses regles sont au chapitre 5. Les 
 
 ### 8.4 HUD de la vue etage
 
-Le HUD affiche en permanence les informations vitales de la run. Il est concu en **16:9 (paysage)** pour le PC, avec une variante **portrait** envisagee pour le telephone.
+Le HUD affiche en permanence les informations vitales de la run. Il est concu en **16:9 (paysage)** pour le PC, avec une variante **portrait** envisagee pour le telephone. [TODO : Corriger pour correspondre aux decisions prises de vue carree et de brouillard]
 
 | Element | Description | Position (paysage) |
 |---|---|---|
-| Barre de vie | Barre de PV avec valeur numerique (ex. 17/34) | Haut gauche |
-| Reserve de nourriture | Compteur de nourriture restante (ex. 320) | Sous la barre de vie |
-| Monnaie | Compteur de monnaie (ex. 64) | Sous la barre de vie |
-| Objets lancables | Nombre de hachettes disponibles (ex. 5) | Sous la barre de vie |
+| Barre de vie | Barre de PV completee d'une valeur numerique (ex. 17/34) | Haut gauche |
+| Reserve de nourriture | Icone de nourriture avec quantite disponible en valeur numerique (ex. 320) | Sous la barre de vie |
+| Monnaie | Icone de monnaie avec quantite disponible en valeur numerique (ex. 64) | Sous la barre de vie |
+| Objets lancables | Icone de hachette avec quantite disponible en valeur numerique (ex. 5) | Sous la barre de vie |
 | Inventaire | Emplacements d'items utilisables (jusqu'a 5 affiches) | Haut droite, en ligne |
 | Score | Score courant de la run (ex. 1.320.000) | Bas droite |
 
@@ -727,18 +716,14 @@ Les paliers sont ordonnes par priorite. Chaque palier n'est aborde que si le pre
 
 **Palier 5 - Familiers**
 
-- Pets (si le temps le permet) [A DEFINIR]
+- Pets
 
 **Palier a positionner**
 
 - Test de touche (Dex)
 - Support manette
 
-### 10.4 Jeu complet (apres la vertical slice)
-
-Pour reference, le jeu complet decrit dans ce document comprend, au-dela des paliers ci-dessus : les 8 autres biomes (un par royaume), leurs monstres endemiques et leurs boss, les artefacts uniques, les mecaniques de biome, l'etape finale en Asgard avec le combat contre Odin, ainsi que le support tactile / telephone. Leur planification est [A DEFINIR] une fois la vertical slice validee.
-
-### 10.5 Criteres de reussite de la vertical slice
+### 10.4 Criteres de reussite de la vertical slice
 
 - Une run complete est jouable de l'ecran de demarrage jusqu'a l'ecran de fin, victoire ou defaite.
 - La boucle "explorer - combattre - gerer sa nourriture" est comprehensible sans explication.
