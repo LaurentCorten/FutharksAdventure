@@ -1,7 +1,5 @@
 # FUTHARK'S ADVENTURE - *A Motion Twin Tribute*
 
-
-
 Octobre 2026
 
 **Auteur :** [A COMPLETER]
