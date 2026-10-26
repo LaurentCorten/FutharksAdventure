@@ -1,6 +1,4 @@
-# FUTHARK'S ADVENTURE - *A Motion Twin Tribute*
-
-Octobre 2026
+# FUTHARK'S ADVENTURE - *A Motion Twin Tribute* : Game Design Document MaJ 26 octobre 2026
 
 **Auteur :** Laurent Corten
 
