@@ -57,12 +57,12 @@ Objectif : un carre qui se deplace sur une grille, un tour a la fois, camera qui
 - [x] (T) Tests verts
 
 ### 2.2 Vue de grille (Game)
-- [ ] GridView : dessine TOUTE la FloorGrid dans un Tilemap (placeholders carres de couleur)
-- [ ] Etage de test code en dur (en attendant la generation procedurale de la Phase 5)
-- [ ] Convention : 1 case = 1 unite Unity (conversion GridPosition <-> monde triviale)
-- [ ] Camera fixe cadrant l'etage de test (le suivi du joueur arrive en 2.4)
-- [ ] Hors grille : fond uni (case Empty)
-- [ ] (V) L'etage s'affiche, la camera reste centree sur le joueur, y compris pres des bords
+- [x] GridView : dessine TOUTE la FloorGrid dans un Tilemap (placeholders carres de couleur)
+- [x] Etage de test code en dur (en attendant la generation procedurale de la Phase 5)
+- [x] Convention : 1 case = 1 unite Unity
+- [x] Camera fixe cadrant l'etage de test (le suivi du joueur arrive en 2.4)
+- [x] Hors grille : fond uni (case Empty)
+- [x] (V) l’etage de test s’affiche en entier, correctement oriente
 
 ### 2.3 Systeme de tours (Core)
 - [ ] (D) Seance de conception : tours, actions, deplacement, occupation des cases (avant tout code)
