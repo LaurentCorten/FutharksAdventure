@@ -1,6 +1,0 @@
-- Rajouter tous les accents et caractères spéciaux => mettre les nom avec l'orthographe correcte,
-- Vérifier emplacement des mondes les uns par rapport aux autres,
-- Faire corriger chapitre 5 sachant qu'il n'y a pas d'inventaire,
-- Repasser par IA moins de redites (autres IA comme GPT ou Gemini ?)
-- Envoyer à Bastien et Thomas
-- Avis de Polak
