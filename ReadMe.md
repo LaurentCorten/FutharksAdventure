@@ -3,7 +3,7 @@
 
 **[English](#en) | [Français](#fr)**
 
-> **Branch notice:** `main` holds the latest stable version. Active development happens on the [`dev`](https://github.com/<user>/<repo>/tree/dev) branch, where progress is updated after each feature.
+> **Branch notice:** `main` holds the latest stable version. Active development happens on the [`dev`](https://github.com/LaurentCorten/FutharksAdventure/tree/dev) branch, where progress is updated after each feature.
 
 ---
 
@@ -47,7 +47,7 @@ The deliverable is twofold:
 |---|---|
 | [Game Design Document *](Documents/FutharksAdventure_GDD.md) | Full game vision: universe, gameplay, items, enemies, generation, UI, art direction, vertical slice scope |
 | [Roadmap *](Documents/FutharksAdventure_RoadMap.md) | Development plan of the vertical slice, phase by phase |
-| [CV](CORTENLaurent-CV_GameDesigner_Developer_2026.en.pdf) | Author's resume |
+| [CV](Documents/CORTENLaurent-CV_GameDesigner_Developer_2026.en.pdf) | Author's resume |
 
 **The documentation is written in French.*
 
