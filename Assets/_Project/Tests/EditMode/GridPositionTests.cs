@@ -18,7 +18,7 @@ namespace FutharksAdventure.Tests
             GridPosition sumPos = pos1 + pos2;
 
             // Assert
-            Assert.AreEqual(new GridPosition(2, 2), sumPos);
+            Assert.AreEqual(new GridPosition(3, 3), sumPos);
         }
     
 

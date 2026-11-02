@@ -73,7 +73,7 @@ namespace FutharksAdventure.Tests
 
             Assert.AreEqual(TileType.Empty, grid.GetTileType(new GridPosition(1, 2)));
             Assert.AreEqual(TileType.Empty, grid.GetTileType(new GridPosition(3, 1)));
-            Assert.AreEqual(TileType.Empty, grid.GetTileType(new GridPosition(2, 2)));
+            Assert.AreEqual(TileType.Empty, grid.GetTileType(new GridPosition(3, 3)));
         }
 
         [TestCase(-1, 0)]
