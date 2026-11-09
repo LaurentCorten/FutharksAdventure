@@ -13,7 +13,7 @@ namespace FutharksAdventure.Core
                 Direction.East => new GridPosition(1, 0),
                 Direction.South => new GridPosition(0, -1),
                 Direction.West => new GridPosition(-1, 0),
-                _ => throw new ArgumentException(nameof(direction))
+                _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
             };
         }
     }
