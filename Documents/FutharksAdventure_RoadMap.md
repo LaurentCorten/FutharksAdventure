@@ -64,9 +64,9 @@ Objectif : un carre qui se deplace sur une grille, un tour a la fois, camera qui
 ### 2.3 Systeme de tours (Core)
 - [x] (D) Seance de conception : tours, actions, deplacement, occupation des cases (avant tout code)
 - [x] Direction : enum 4 directions cardinales + conversion en decalage GridPosition
-- [ ] EventBus : instance injectee (pas statique), Subscribe / Unsubscribe / Publish generiques
-- [ ] Entity (abstraite, Position en lecture seule) + Player (vide pour l'instant)
-- [ ] OccupancyMap : couche des occupants, seule a modifier la position des entites
+- [x] EventBus : instance injectee (pas statique), Subscribe / Unsubscribe / Publish generiques
+- [x] Entity (abstraite, Position en lecture seule) + Player (vide pour l'instant)
+- [x] OccupancyMap : couche des occupants, seule a modifier la position des entites
 - [ ] GameAction (abstraite) : CanExecute() public, TryExecute() avec garde, Execute() protege
 - [ ] MoveAction : case praticable et libre, sinon refus sans tour ; publie EntityMoved
 - [ ] IntentResolver : traduit une intention en action (direction -> MoveAction en 2.3)
