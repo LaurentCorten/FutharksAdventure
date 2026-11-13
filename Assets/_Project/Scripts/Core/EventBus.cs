@@ -16,5 +16,24 @@ namespace FutharksAdventure.Core
             }
             handlers.Add(handler);
         }
+
+        public void Publish<T>(T evt) where T : struct
+        {
+            if (_subscribers.TryGetValue(typeof(T), out List<Delegate> handlers))
+            {
+                foreach (Action<T> handler in handlers.ToArray())
+                {
+                    handler(evt);
+                }
+            }
+        }
+
+        public void Unsubscribe<T>(Action<T> handler) where T : struct
+        {
+            if (_subscribers.TryGetValue(typeof(T), out List<Delegate> handlers))
+            {
+                handlers.Remove(handler);
+            }
+        }
     }
 }
